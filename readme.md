@@ -1,7 +1,7 @@
 # ReHood
 
 ## Description
-A free marketplace for rehoming unwanted items, ReGood makes it easy to connect with your community and rehome goods in your neighbourhood.
+A free marketplace for rehoming unwanted items, ReHood makes it easy to connect with your community and rehome goods in your neighbourhood.
 
 ## User Stories
 
