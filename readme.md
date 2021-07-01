@@ -7,78 +7,72 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 
 ## Routes
 
-#### Authentication & Authorisation
-**Existing user**
-##### GET /auth/login
+### Auth
+##### GET /login
 * if user already logged in, redirect to homepage.hbs
 * otherwise, render login.hbs
 
-##### POST /auth/login
+##### POST /login
 * body: Email Address, Password
 * if successful, render homepage.hbsgit 
 
-**New user - CREATE PROFILE**
-##### GET /auth/signup**
+##### GET /signup
 * if user already logged in, redirect to homepage.hbs
 * otherwise, render signup.hbs
 
-##### POST /auth/signup
+##### POST /signup
 * body: Name, Email Address, Password, NeighbourhoodRef
 * redirect to login.hbs
 
-**Sign out button**
-##### POST /auth/logout
+##### POST /logout
 * redirect to login.hbs
 
 
-#### Main Site
-**Home**
+### Create Listings
+##### GET /create/:id
+* render createListing.hbs
+
+##### POST /create/:id
+* redirect to viewListing.hbs
+* id is for the listing
+
+
+### View Listings
 ##### GET /
 * render homepage.hbs
 
 ##### GET /listings
 * render homepage.hbs
 
-
-**LISTINGS - CREATE**
-##### GET /create/:id
-* render createListing.hbs
-
-##### POST /create/:id
-* redirect to listingDetails.hbs
-
-
-**LISTINGS - READ**
 ##### GET /listings/:id
-* dynamically render listingDetails.hbs
-* placeholder for chat functionality
+* dynamically render viewListing.hbs
+* id is for the listing
 
-**LISTINGS - UPDATE**
-##### GET /listings/:id/edit
-* render editListing.hbs
 
-##### POST /listings/:id/edit
-* redirect to listingDetails.hbs
+### Manage Listings
+##### POST /manage/:id
+* redirect to manageListings.hbs page with all my listings
+* id is for the user
 
-**LISTINGS - DELETE**
-##### POST /profile/:id**
+##### GET /manage/:id
+* render editListing.hbs form 
+* id is for the user
+
+##### POST /manage/:id
 * delete listing
-* render profile.hbs
+* render manageListings.hbs
 
 
-**PROFILE - READ, UPDATE, DELETE**
-##### GET /profile/:id**
-* render profile.hbs
+### Manage Account
+##### GET /account/:id
+* render account.hbs
+* id is for the user
 
-##### POST /profile/:id
-* saving and editing details
-* redirect to homepage.hbs
+##### POST /account/:id
+* edit and save details
+* id is for the user
 
-##### POST /profile/:id
-* clicking to edit listing
-* redirect to editListing.hbs
-
-##### POST /profile/:id
+##### POST /account/:id
 * delete profile
 * redirect to signup.hbs
 
@@ -101,6 +95,7 @@ new Schema
 * Description
 * Photo
 * Listing Duration
+* Status: Available, Reserved, Unavailable
 * UserOwnerRef: user._id
 * NeighbourhoodRef: neighbourhood._id
 
@@ -113,3 +108,4 @@ new Schema
 ## Backlog
 
 ## Links
+Wireframes: https://whimsical.com/wireframes-JyJ82nAMyWAcLTirGQPJUf
