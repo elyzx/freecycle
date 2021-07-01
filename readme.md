@@ -8,7 +8,7 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 ## Routes
 
 #### Authentication & Authorisation
-// Existing user
+Existing user
 **GET /auth/login**
 * if user already logged in, redirect to homepage.hbs
 * otherwise, render login.hbs
@@ -17,7 +17,7 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 * body: Email Address, Password
 * if successful, render homepage.hbsgit 
 
-// New user - CREATE PROFILE
+New user - CREATE PROFILE
 **GET /auth/signup**
 * if user already logged in, redirect to homepage.hbs
 * otherwise, render signup.hbs
@@ -26,13 +26,13 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 * body: Name, Email Address, Password, NeighbourhoodRef
 * redirect to login.hbs
 
-// Sign out button
+Sign out button
 **POST /auth/logout**
 * redirect to login.hbs
 
 
 #### Main Site
-// Home
+Home
 **GET /**
 * render homepage.hbs
 
@@ -40,7 +40,7 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 * render homepage.hbs
 
 
-// LISTINGS - CREATE
+LISTINGS - CREATE
 **GET /create/:id**
 * render createListing.hbs
 
@@ -48,25 +48,25 @@ A free marketplace for rehoming unwanted items, ReHood makes it easy to connect 
 * redirect to listingDetails.hbs
 
 
-// LISTINGS - READ
+LISTINGS - READ
 **GET /listings/:id**
 * dynamically render listingDetails.hbs
 * placeholder for chat functionality
 
-// LISTINGS - UPDATE
+LISTINGS - UPDATE
 **GET /listings/:id/edit**
 * render editListing.hbs
 
 **POST /listings/:id/edit**
 * redirect to listingDetails.hbs
 
-// LISTINGS - DELETE
+LISTINGS - DELETE
 **POST /profile/:id**
 * delete listing
 * render profile.hbs
 
 
-// PROFILE - READ, UPDATE, DELETE
+PROFILE - READ, UPDATE, DELETE
 **GET /profile/:id**
 * render profile.hbs
 
