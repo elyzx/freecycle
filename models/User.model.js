@@ -6,10 +6,10 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  // neighbourhoods: [ {
-  //   ref: 'Neighbourhood',
-  //   type: mongoose.Schema.Types.ObjectId
-  // }]
+  neighbourhoods: [ {
+    ref: 'Neighbourhood',
+    type: mongoose.Schema.Types.ObjectId
+  }]
   
 });
 

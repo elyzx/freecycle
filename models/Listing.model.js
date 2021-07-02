@@ -9,14 +9,14 @@ const listingSchema = new Schema({
  photo: String,
  expiration: String,
  Status: String,
-//  neighbourhoods: [ {
-//     ref: 'Neighbourhood',
-//     type: mongoose.Schema.Types.ObjectId
-//   }],
-//   user: {
-//     ref: 'User',
-//     type: mongoose.Schema.Types.ObjectId
-//   }
+ neighbourhoods: [ {
+    ref: 'Neighbourhood',
+    type: mongoose.Schema.Types.ObjectId
+  }],
+  user: {
+    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId
+  }
 
 
 });
