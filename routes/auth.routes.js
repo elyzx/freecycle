@@ -8,7 +8,7 @@ const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
 
 //---------------
-//  SIGN-IN
+//  LOGN-IN
 //---------------
 
 // Handle GET request to /login page
@@ -77,7 +77,8 @@ router.post('/signup', (req, res, next) => {
         const salt = bcrypt.genSaltSync(10);
         // Uses the salt and the password to create a hashed password
         const hash = bcrypt.hashSync(password, salt);
-        User.create({username, email, password: hash})
+
+        UserModel.create({name, email, neighbourhood, password: hash})
             .then(() => {
                 res.redirect('/')
             })
@@ -89,14 +90,51 @@ router.post('/signup', (req, res, next) => {
 //---------------
 //  SIGNOUT
 //---------------
+//----------  MIDDLEWARE FOR PERMISSIONS ---------------
+function checkLoggedIn(req, res, next) {
+    if (req.session.loggedInUser) {
+        next()
+    }
+    else {
+        res.redirect('/login')
+    }
+}
 
-// router.get('/login', (req, res, next) => {
-//     req.session.destroy()
+//----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
+//FIRST PAGE TO BE RENDERED AFTER LOG-IN
+router.get('/listings', checkLoggedIn, (req,res) => {
+    if (req.session.loggedInClient){
+       res.render('listings/viewListing.hbs', {name: req.session.loggedInUser.name} )
+    }
+    else{
+        res.redirect('/login')
+    }
+})
 
-//     // set global
-//     req.app.locals.isLoggedIn = false;
-//     res.redirect('/')
-//  })
+// OTHER PAGES
+router.get('/manage', checkLoggedIn, (req,res) => {
+   res.render('listings/manageListings.hbs')
+})
 
+router.get('/edit', checkLoggedIn, (req,res) => {
+    res.render('listings/editListing.hbs')
+ })
+
+ router.get('/create', checkLoggedIn, (req,res) => {
+    res.render('listings/createListing.hbs')
+ })
+
+ router.get('/account', checkLoggedIn, (req,res) => {
+    res.render('account.hbs')
+ })
+
+//----------  DESTROY THE SESSION ---------------
+router.get('/logout', (req, res, next) => {
+   req.session.destroy()
+
+   // set global
+   req.app.locals.isLoggedIn = false;
+   res.redirect('/')
+})
 
 module.exports = router;
