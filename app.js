@@ -27,18 +27,6 @@ app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialize: false,
-    cookie: {
-        maxAge: 1000 * 24 * 60 * 60 // cookie cleared after these miliseconds 
-    },
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/basic-auth",
-        ttl: 24 * 60 * 60 // session cleard after these seconds
-    })
-  }));
 
 // 👇 Start handling routes here
 const index = require("./routes/index");
