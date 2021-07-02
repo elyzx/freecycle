@@ -1,1 +1,27 @@
-// account page for updating profile/changing neighbourhood
+<h1>Account</h1>
+
+<form method="POST" action="/signup">
+
+  <div class="mb-3">
+    <label for="exampleInputName" class="form-label">Name</label>
+    <input type="text" name="name" value="" class="form-control" id="exampleInputName">
+  </div>
+  
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" name="email" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+
+  <div class="mb-3">
+      <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
+      <select class="form-select" value="" aria-label="Default select example">
+            {{#each neighbourhood}}
+            <option selected> Open this select menu</option>
+            <option value="{{this._id}}">{{this.neighbourhood}}</option>
+            {{/each}}
+        </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
