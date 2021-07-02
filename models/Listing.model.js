@@ -8,12 +8,12 @@ const listingSchema = new Schema({
  title: String,
  description: String,
  photo: String,
- expiration: String,
- Status: String,
- neighbourhoods: [ {
+ expiration: Date,
+ status: String,
+ neighbourhood: {
     ref: 'Neighbourhood',
     type: mongoose.Schema.Types.ObjectId
-  }],
+  },
   user: {
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId
