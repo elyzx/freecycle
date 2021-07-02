@@ -10,8 +10,7 @@ const bcrypt = require('bcryptjs');
 //---------------
 //  LOGN-IN
 //---------------
-
-// Handle GET request to /login page
+//----------  HANDLE GET REQUEST TO /login PAGE ---------------
 router.get('/login', (req, res, next) => {
     res.render('auth/login.hbs')
 })
@@ -43,8 +42,7 @@ router.post('/login', (req, res, next) => {
 //---------------
 //  SIGN-UP
 //---------------
-
-// Handle GET request to /signup page
+//----------  HANDLE GET REQUEST TO /signup PAGE ---------------
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
 })
