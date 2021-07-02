@@ -7,7 +7,7 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  neighbourhoods: [ {
+  neighbourhood: [ {
     ref: 'Neighbourhood',
     type: mongoose.Schema.Types.ObjectId
   }]

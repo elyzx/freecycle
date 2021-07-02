@@ -8,10 +8,10 @@ const mongoose = require('mongoose')
 const UserModel = require('../models/User.model')
 
 UserModel.insertMany([
-    {name: 'Manish', email: 'manish@hey.com'},
-    {name: 'Julie', email: 'julie@hey.com'},
-    {name: 'Yanis', email: 'yanis@hey.com'},
-    {name: 'Pablo', email: 'pablo@hey.com'}
+    {name: 'Manish', email: 'manish@hey.com', neighbourhood: '60df1f981a98202ec3a66622'},
+    {name: 'Julie', email: 'julie@hey.com', neighbourhood: '60df1f981a98202ec3a66622'},
+    {name: 'Yanis', email: 'yanis@hey.com', neighbourhood: '60df1f981a98202ec3a66623'},
+    {name: 'Pablo', email: 'pablo@hey.com', neighbourhood: '60df1f981a98202ec3a66624'}
 ])
     .then(() => {
         console.log('User added')
