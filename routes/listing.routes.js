@@ -58,7 +58,9 @@ router.get('/manage', (req, res, next) => {
 });
 
 // Enable the user to edit an existing listing
-// GET
+router.get('/edit', (req, res, next) => {
+    res.render('listings/editListing.hbs')
+})
 // POST
 
 // ------------------------------------- //
