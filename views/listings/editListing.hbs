@@ -1,1 +1,28 @@
-// Form for editing existing listing
+<h1>Edit Listing</h1>
+
+<form method="POST" action="/edit">
+
+  <div class="mb-3">
+    <label for="exampleInputTitle" class="form-label">Item Name</label>
+    <input type="text" name="title" value="" class="form-control" id="exampleInputTitle">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+    <textarea class="form-control" name="description" value="" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+    <!-- Add photo upload here -->
+
+  <div class="mb-3">
+      <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
+      <select class="form-select" value="" aria-label="Default select example">
+            {{#each neighbourhood}}
+            <option selected> Open this select menu</option>
+            <option value="{{this._id}}">{{this.neighbourhood}}</option>
+            {{/each}}
+        </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
