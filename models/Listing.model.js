@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+let mongoose = require('mongoose');
 require('./Neighbourhood.model')
 require('./User.model')
 
