@@ -10,10 +10,20 @@ a {
 }
 
 h1 {
-  color: 15px;
+  size: 40px;
+}
+
+h2 {
+  size: 30px;
+  padding-bottom: 10px;
 }
 
 /* Navigation */
+.navbar-brand {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
 .navbar-nav > li{
   display: flex;
 }
@@ -23,7 +33,7 @@ h1 {
   color: #eaeaea;
   padding: 15px;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 5px;
   margin: 10px;
 }
 
@@ -39,7 +49,7 @@ h1 {
   color: #eaeaea;
   padding: 15px;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 5px;
   margin: 10px;
 }
 
@@ -61,8 +71,9 @@ h1 {
 
 footer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: auto; 
+  align-items: center;
   padding: 25px;
   background-color: #F8FAFA;
 }

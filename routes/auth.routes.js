@@ -25,7 +25,7 @@ router.post('/login', (req, res, next) => {
                 if (isValid) {
                     req.session.loggedInUser = user
                     req.app.locals.isLoggedIn = true;
-                    res.redirect('/listings')
+                    res.redirect('/')
                 }
                 else {
                     res.render('auth/login', {error: 'Invalid password'})
