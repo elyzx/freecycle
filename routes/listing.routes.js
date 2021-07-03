@@ -7,7 +7,7 @@ const ListingModel = require("../models/Listing.model");
 // Show the homepage - same as ('/')
 // Handle GET request to /listings and render homepage
 router.get('/listings', (req, res, next) => {
-    res.render('index.hbs')
+    res.redirect('/')
 });
 
 // Dynamically show an individual listing
@@ -17,7 +17,7 @@ router.get('/listings/:id', (req, res, next) => {
     
     ListingModel.findById(dynamicListingId)
         .then((listing) => {
-            res.render('viewListing.hbs', {listing})
+            res.render('listings/viewListing.hbs', {listing})
         })
         .catch(() => {
             next('Failed to find listing details')
