@@ -1,5 +1,6 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px;
+  font-family: 'Work Sans', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,16 +12,22 @@ a {
 
 h1 {
   size: 40px;
+  color: #073b4c;
 }
 
 h2 {
   size: 30px;
+  color: #073b4c;
   padding-bottom: 10px;
 }
 
 /* Navigation */
+.navbar {
+  padding-left: 40px;
+  padding-right: 30px;
+}
+
 .navbar-brand {
-  padding-left: 15px;
   padding-top: 10px;
 }
 
@@ -34,14 +41,12 @@ h2 {
   padding: 15px;
   text-decoration: none;
   border-radius: 5px;
-  margin: 10px;
 }
 
 .primary-button:hover{
   background-color: #073b4c;
   color: #eaeaea;
   text-decoration: none;
-  margin: 10px;
 }
 
 .secondary-button {
@@ -50,14 +55,13 @@ h2 {
   padding: 15px;
   text-decoration: none;
   border-radius: 5px;
-  margin: 10px;
+  margin-right: 10px;
 }
 
 .secondary-button:hover {
   background-color: #073b4c;
   color: #eaeaea;
   text-decoration: none;
-  margin: 10px;
 }
 
 
@@ -68,7 +72,7 @@ h2 {
 
 
 
-
+/* Footer */
 footer {
   display: flex;
   justify-content: space-around;
