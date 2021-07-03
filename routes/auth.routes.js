@@ -26,12 +26,14 @@ router.post('/login', (req, res, next) => {
                 if (isValid) {
                     req.session.loggedInUser = user
                     req.app.locals.isLoggedIn = true;
-                    res.redirect('/listings')
+                    res.redirect('/listings' + '/' + user._id)
+                    
                 }
                 else {
                     res.render('auth/login', {error: 'Invalid password'})
                 } 
-            } else {
+            } 
+            else {
                 res.render('auth/login', {error: 'Email does not exist'})
             }
         })
@@ -109,14 +111,14 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-router.get('/listings', checkLoggedIn, (req,res) => {
-    if (req.session.loggedInClient){
-       res.render('listings/viewListing.hbs', {name: req.session.loggedInUser.name} )
-    }
-    else{
-        res.redirect('/login')
-    }
-})
+// router.get('/listings', checkLoggedIn, (req,res) => {
+//     if (req.session.loggedInClient){
+//        res.render('listings/viewListing.hbs', {name: req.session.loggedInUser.email} )
+//     }
+//     else{
+//         res.redirect('/login')
+//     }
+// })
 
 // OTHER PAGES
 router.get('/manage', checkLoggedIn, (req,res) => {

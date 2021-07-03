@@ -2,6 +2,9 @@
 const router = require("express").Router();
 // Require listing model
 const ListingModel = require("../models/Listing.model");
+// User model
+const UserModel = require("../models/User.model");
+
 
 // ---------- VIEW/READ LISTINGS ---------- //
 // Show the homepage - same as ('/')
@@ -11,19 +14,49 @@ const ListingModel = require("../models/Listing.model");
 //     res.render('index.hbs')
 // });
 
+// ----------------------- ELLEN ORIGINAL CODE ---------------------------------
 // Dynamically show an individual listing
 // Handle GET request to /listings:id
-router.get('/listings/:id', (req, res, next) => {
-    let dynamicListingId = req.params.id
+
+// router.get('/listings/:id', (req, res, next) => {
+//     let dynamicListingId = req.params.id
     
-    ListingModel.findById(dynamicListingId)
-        .then((listing) => {
-            res.render('listings/viewListing.hbs', {listing})
+//     ListingModel.findById(dynamicListingId)
+//         .then((listing) => {
+//             res.render('listings/viewListing.hbs', {listing})
+//         })
+//         .catch(() => {
+//             next('Failed to find listing details')
+//         })
+// })
+
+// ----------------------- ELLEN ORIGINAL CODE ---------------------------------
+
+
+// ----------------------- HUMBERTO CODE ---------------------------------
+
+// router.get('/listings', (req, res, next) => {
+
+//     res.render('index.hbs')
+// });
+
+router.get('/listings/:id', (req, res, next) => {
+    let dynamicUserId = req.params.id
+    
+    UserModel.findById(dynamicUserId)
+        .then((user) => {
+            console.log(user)
+            res.render('listings/viewListing.hbs', {user})
         })
         .catch(() => {
-            next('Failed to find listing details')
+            next('Failed to find user details')
         })
 })
+
+// ----------------------- HUMBERTO CODE ---------------------------------
+
+
+
 
 // Later on -- POST request to handle form submission/contact functionality
 
