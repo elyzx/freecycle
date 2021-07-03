@@ -17,24 +17,28 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
     const {email, password} = req.body
+    console.log('helloo' + email, password)
 
     UserModel.findOne({email})
         .then((user) => {
             if (user) {
                 let isValid = bcrypt.compareSync(password, user.password)
                 if (isValid) {
-                    req.session.loggedInUser = user
+                    req.session.loggedInUser = user;
                     req.app.locals.isLoggedIn = true;
                     res.redirect('/')
                 }
                 else {
+                    console.log('invalid password')
                     res.render('auth/login', {error: 'Invalid password'})
                 } 
             } else {
+                console.log('email fail')
                 res.render('auth/login', {error: 'Email does not exist'})
             }
         })
         .catch((error) => {
+            console.log(error)
             next(error)
         })
 })
