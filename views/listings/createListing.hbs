@@ -1,28 +1,32 @@
-<h1>Create Listing</h1>
+<div class="main-container">
+  <h1>Create Listing</h1>
 
-<form method="POST" action="/create">
+  <form method="POST" action="/create">
 
-  <div class="mb-3">
-    <label for="exampleInputTitle" class="form-label">Item Name</label>
-    <input type="text" name="title" class="form-control" id="exampleInputTitle">
-  </div>
+    <div class="mb-3">
+      <label for="exampleInputTitle" class="form-label">Item Name</label>
+      <input type="text" name="title" class="form-control" id="exampleInputTitle">
+    </div>
 
-  <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
 
     <!-- Add photo upload here -->
 
-  <div class="mb-3">
+    <div class="mb-3">
       <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
       <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
             {{#each neighbourhood}}
-            <option selected> Open this select menu</option>
-            <option value="{{this._id}}">{{this.neighbourhood}}</option>
+            <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
-        </select>
-  </div>
+      </select>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn primary-button">Submit</button>
+  
 </form>
+
+</div>

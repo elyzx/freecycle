@@ -1,7 +1,7 @@
-# ReHood
+# Freecycle
 
 ## Description
-A free marketplace for rehoming unwanted items, ReHood makes it easy to connect with your community and rehome goods in your neighbourhood.
+A free marketplace for rehoming unwanted items, Freecycle makes it easy to connect with your community and rehome goods in your neighbourhood.
 
 ## User Stories
 
@@ -109,4 +109,3 @@ new Schema
 
 ## Links
 Wireframes: https://whimsical.com/wireframes-JyJ82nAMyWAcLTirGQPJUf
->>>>>>> 9c7a4f4e228a926a561cadf08dd7f9fac57b4896

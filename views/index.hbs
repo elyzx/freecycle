@@ -1,13 +1,10 @@
-<h1>{{title}} 🚀</h1>
-<p>Welcome Ironhacker!</p>
+<div class="main-container"> 
+    <h1>Rehome goods in your Neighbourhood</h1>
 
-
-<a href="/login">Login</a>
-
-<a href="/signup">Sign up</a>
-
-<a href="/listings">Listings</a>
-
-<a href="/account">Account</a>
-
-<a href="/edit">Edit Listing</a>
+    {{#each listings}}
+        <a href="/listings/{{this._id}}">
+            <p>{{this.title}}</p>
+        </a>
+    {{/each}}
+    
+</div>
