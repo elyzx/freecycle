@@ -17,7 +17,6 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
     const {email, password} = req.body
-    console.log('helloo' + email, password)
 
     UserModel.findOne({email})
         .then((user) => {
@@ -29,16 +28,13 @@ router.post('/login', (req, res, next) => {
                     res.redirect('/')
                 }
                 else {
-                    console.log('invalid password')
-                    res.render('auth/login', {error: 'Invalid password'})
+                    res.render('auth/login', {error: 'Invalid password. Please check and try again.'})
                 } 
             } else {
-                console.log('email fail')
-                res.render('auth/login', {error: 'Email does not exist'})
+                res.render('auth/login', {error: 'Email does not exist. Please check and try again.'})
             }
         })
         .catch((error) => {
-            console.log(error)
             next(error)
         })
 })

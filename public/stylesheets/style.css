@@ -64,10 +64,20 @@ h2 {
   text-decoration: none;
 }
 
-
+/* Body */
 .main-container {
   display: block;
   padding: 50px;
+}
+
+.error {
+  background: #f02b63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
 }
 
 
