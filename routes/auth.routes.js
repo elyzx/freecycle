@@ -24,15 +24,15 @@ router.post('/login', (req, res, next) => {
             if (user) {
                 let isValid = bcrypt.compareSync(password, user.password)
                 if (isValid) {
-                    req.session.loggedInUser = user;
+                    req.session.loggedInUser = user
                     req.app.locals.isLoggedIn = true;
-                    res.redirect('/')
+                    res.redirect('/listings')
                 }
                 else {
-                    res.render('auth/login', {error: 'Invalid password. Please check and try again.'})
+                    res.render('auth/login', {error: 'Invalid password'})
                 } 
             } else {
-                res.render('auth/login', {error: 'Email does not exist. Please check and try again.'})
+                res.render('auth/login', {error: 'Email does not exist'})
             }
         })
         .catch((error) => {
@@ -54,7 +54,6 @@ router.get('/signup', (req, res, next) => {
     .catch((err) => {
         next(err)
     })
-    
 })
 
 router.post('/signup', (req, res, next) => {

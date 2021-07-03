@@ -22,13 +22,9 @@
   </div>
 
   <div class="mb-3">
-      <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
-      <select class="form-select" aria-label="Default select example">
-<<<<<<< HEAD
+      <label for="neighbourhood" class="form-label">Select your neighbourhood</label>
+      <select class="form-select" name="neighbourhood" aria-label="Default select example">
             <option selected> Select your neighbourhood</option>
-=======
-            <option selected>Open this select menu</option>
->>>>>>> 66f95aef0ed2ddbbf84ae435f1591479a8bffd3c
             {{#each neighbourhood}}
             <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
