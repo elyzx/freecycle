@@ -16,8 +16,8 @@
     <!-- Add photo upload here -->
 
     <div class="mb-3">
-      <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
-      <select class="form-select" aria-label="Default select example">
+      <label for="neighbourhood" class="form-label">Neighbourhood</label>
+      <select class="form-select" name="neighbourhood" aria-label="Default select example">
           <option selected>Open this select menu</option>
             {{#each neighbourhood}}
             <option value="{{this._id}}">{{this.name}}</option>
