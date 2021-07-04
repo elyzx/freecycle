@@ -14,14 +14,15 @@ const NeighbourhoodModel = require('../models/Neighbourhood.model')
 // })
 
 router.get('/account/:id', (req, res, next) => {
-    let dynamicListingId = req.params.id
+    let dynamicUserId = req.params.id
+    const {name, email, neighbourhood} = req.body
 
-    UserModel.findById(dynamicListingId)
-        .then((selectecUser) => {
+    UserModel.findById(dynamicUserId)
+        .then((user) => {
 
-            NeighbourhoodModel.find({})
+            NeighbourhoodModel.find(neighbourhood)
             .then((neighbourhood) => {
-                res.render('account.hbs', {neighbourhood , selectecUser})
+                res.render('account.hbs', {user, neighbourhood})
             })
             .catch((err) => {
                 next(err)

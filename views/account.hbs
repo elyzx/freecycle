@@ -5,17 +5,17 @@
 
     <div class="mb-3">
       <label for="exampleInputName" class="form-label">Name</label>
-      <input type="text" name="name" value="" class="form-control" id="exampleInputName">
+      <input type="text" name="name" value="{{user.name}}" class="form-control" id="exampleInputName">
     </div>
   
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" name="email" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input type="email" name="email" value="{{user.email}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
 
     <div class="mb-3">
       <label for="exampleInputNeighbourhood" class="form-label">Neighbourhood</label>
-      <select class="form-select" value="" aria-label="Default select example">
+      <select class="form-select" value="{{neighbourhood.name}}" aria-label="Default select example">
             {{#each neighbourhood}}
               <option selected> Open this select menu</option>
               <option value="{{this._id}}">{{this.neighbourhood}}</option>
