@@ -98,9 +98,9 @@ router.post('/signup', (req, res, next) => {
             })
 })
 
-//---------------
-//  SIGNOUT
-//---------------
+//-------------------
+//  PAGE PERMISSIONS
+//-------------------
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
     if (req.session.loggedInUser) {
@@ -117,7 +117,7 @@ router.get("/", (req, res, next) => {
     if (req.session.loggedInUser) {
       ListingModel.find()
       .then((listings) => {
-        res.render("index", {listings})
+        res.render("index", {listings, layout: body})
         //res.render('index.hbs', {title: req.session.loggedInUser.title} )   --- TO KEEP THE CONTENT AFTER RELOADING THE BROWSER ---
       })
       .catch(() => {
@@ -129,27 +129,27 @@ router.get("/", (req, res, next) => {
     }
   });
 
-// OTHER PAGES
 
 // MANAGE LISTINGS PAGE - /manage
 // router.get('/manage', checkLoggedIn, (req,res) => {
 //    res.render('listings/manageListings.hbs')
 // })
 
+// LISTINGS PAGE - /listings
 // router.get('/listings', checkLoggedIn, (req,res) => {
 //     res.render('listings/viewListing.hbs')
 //  })
 
+// EDIT PAGE - /EDIT
 // router.get('/edit', checkLoggedIn, (req,res) => {
 //     res.render('listings/editListing.hbs')
 //  })
 
  // CREATE LISTINGS PAGE - /create
 router.get('/create', checkLoggedIn, (req, res, next) => {
-  
+    
     NeighbourhoodModel.find({})
     .then((neighbourhood) => {
-
         res.render('listings/createListing.hbs', {neighbourhood})
     })
      .catch((err) => {
@@ -157,10 +157,14 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
      })
 })
 
+// ACCOUNT PAGE - /account
 //  router.get('/account', checkLoggedIn, (req,res) => {
 //     res.render('account.hbs')
 //  })
 
+//---------------
+//  SIGNOUT
+//---------------
 //----------  DESTROY THE SESSION ---------------
 router.get('/logout', (req, res, next) => {
    req.session.destroy()

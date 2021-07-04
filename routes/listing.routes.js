@@ -73,12 +73,12 @@ router.get('/listings/:id', (req, res, next) => {
 
 // Add form submissions to DB & redirect user to Manage page
 // Handle POST requests to /create listings page 
-router.post('/create', (req, res, next) => {
-    const id = req.params
+router.post('/create/:id', (req, res, next) => {
+    const id = req.params.id
     const {title, description, neighbourhood} = req.body
 
     // Add the listing to our DB
-    ListingModel.create({title, description, neighbourhood})
+    ListingModel.create({title, description, neighbourhood, user: id})
         .then(() => {
             res.redirect('/')
         })
