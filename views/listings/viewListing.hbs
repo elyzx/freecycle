@@ -2,7 +2,9 @@
 
     <a href="/" class="btn secondary-button">Back</a>
 
-    <h2>{{user.name}}</h2>
+    {{#each user}}
+    <h2>{{this.name}}</h2>
+    {{/each}}
 
     
 

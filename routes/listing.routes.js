@@ -44,6 +44,8 @@ router.get('/listings/:id', (req, res, next) => {
     let dynamicUserId = req.params.id
     
     UserModel.findById(dynamicUserId)
+
+    UserModel.find({})
         .then((user) => {
             console.log(user)
             res.render('listings/viewListing.hbs', {user})
@@ -51,6 +53,15 @@ router.get('/listings/:id', (req, res, next) => {
         .catch(() => {
             next('Failed to find user details')
         })
+
+
+        // .then((user) => {
+        //     console.log(user)
+        //     res.render('listings/viewListing.hbs', {user})
+        // })
+        // .catch(() => {
+        //     next('Failed to find user details')
+        // })
 })
 
 // ----------------------- HUMBERTO CODE ---------------------------------

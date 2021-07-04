@@ -111,19 +111,23 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-// router.get('/listings', checkLoggedIn, (req,res) => {
-//     if (req.session.loggedInClient){
-//        res.render('listings/viewListing.hbs', {name: req.session.loggedInUser.email} )
-//     }
-//     else{
-//         res.redirect('/login')
-//     }
-// })
+router.get('/', checkLoggedIn, (req,res) => {
+    if (req.session.loggedInClient){
+       res.render('listings/viewListing.hbs', {name: req.session.loggedInUser.email} )
+    }
+    else{
+        res.redirect('/login')
+    }
+})
 
 // OTHER PAGES
 router.get('/manage', checkLoggedIn, (req,res) => {
    res.render('listings/manageListings.hbs')
 })
+
+// router.get('/listings', checkLoggedIn, (req,res) => {
+//     res.render('listings/viewListing.hbs')
+//  })
 
 router.get('/edit', checkLoggedIn, (req,res) => {
     res.render('listings/editListing.hbs')
