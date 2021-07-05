@@ -120,6 +120,16 @@ router.get('/manage', checkLoggedIn, (req, res, next) => {
 
 // Enable the user to edit an existing listing
 router.get('/edit', checkLoggedIn, (req, res, next) => {
+    let userId = req.session.loggedInUser
+
+    ListingModel.findById(userId._id)
+        .populate('list')
+        .then((user) => {
+            res.render('listings/editListing.hbs')
+        })
+
+
+
     res.render('listings/editListing.hbs')
 })
 // POST
