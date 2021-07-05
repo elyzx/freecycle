@@ -55,7 +55,7 @@ router.get('/listings/:id', (req, res, next) => {
 //Handle GET requests to /create listings page
 
 //----------------- The code below was migrated to the auth route -------------
-// router.get('/create', (req, res, next) => {
+// router.get('/create',  (req, res, next) => {
 //     console.log('is this working?')
 //     NeighbourhoodModel.find({})
 //     .then((neighbourhood) => {

@@ -113,11 +113,11 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-router.get("/", (req, res, next) => {
+router.get("/",   (req, res, next) => {
     if (req.session.loggedInUser) {
       ListingModel.find()
       .then((listings) => {
-        res.render("index", {listings, layout: body})
+        res.render("index", {listings})
         //res.render('index.hbs', {title: req.session.loggedInUser.title} )   --- TO KEEP THE CONTENT AFTER RELOADING THE BROWSER ---
       })
       .catch(() => {
