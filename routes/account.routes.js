@@ -18,7 +18,7 @@ function checkLoggedIn(req, res, next) {
 // Handle GET request to /account
 router.get('/account', checkLoggedIn, (req, res, next) => {
     let userObj = req.session.loggedInUser
-    const {name, email, neighbourhood} = req.body
+    const {neighbourhood} = req.body
 
     UserModel.findById(userObj._id)
         .then((user) => {
@@ -43,8 +43,10 @@ router.post('/account', checkLoggedIn, (req, res, next) => {
 
     const {name, email, neighbourhood} = req.body
 
-    UserModel.findByIdAndUpdate(userObj._id, {name, email, neighbourhood}, {new: false})
-        .then(() => {
+
+    UserModel.findByIdAndUpdate(userObj._id, {name, email, neighbourhood}, {new: true})
+        .then((data) => {
+            console.log(data)
             res.redirect('/')
         })
         .catch((err) => {
