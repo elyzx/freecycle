@@ -6,6 +6,7 @@ const ListingModel = require("../models/Listing.model");
 const UserModel = require("../models/User.model");
 // Require Neighbourhood model
 const NeighbourhoodModel = require("../models/Neighbourhood.model");
+const Listing = require("../models/Listing.model");
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -71,7 +72,6 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
 // Handle POST requests to /create listings page 
 router.post('/create', (req, res, next) => {
     let userObj = req.session.loggedInUser
-    console.log(req.session)
     const {title, description, neighbourhood} = req.body
 
     // Add the listing to our DB
@@ -97,19 +97,26 @@ router.post('/create', (req, res, next) => {
 // ---------- UPDATE LISTINGS ---------- //
 // Show the user all their active listings
 // Handle GET request to /manage listings page
+// check logged in
+// check which user
+// check the user's list of listings
+// display the info for those listings only
 router.get('/manage', checkLoggedIn, (req, res, next) => {
     let userId = req.session.loggedInUser
     console.log(req.session)
-    
+
     UserModel.findById(userId)
+        .populate('list')
         .then((user) => {
-            console.log(user)
+            console.log(userId)
             res.render('listings/manageListings.hbs', {user})
         })
         .catch(() => {
             next('Failed to find user details')
         })
+
 })
+
 
 // Enable the user to edit an existing listing
 router.get('/edit', checkLoggedIn, (req, res, next) => {
@@ -121,10 +128,10 @@ router.get('/edit', checkLoggedIn, (req, res, next) => {
 
 // ---------- DELETE LISTING ----------- //
 // Enable the user to delete an existing listing
-router.post('/manage/:id/delete', checkLoggedIn, (req, res, next) => {
-    let dynamicListingId = req.params.id
+router.post('/manage/delete', checkLoggedIn, (req, res, next) => {
+    let userId = req.session.loggedInUser
 
-    ListingModel.findByIdAndDelete(dynamicListingId)
+    ListingModel.findByIdAndDelete(userId)
         .then(() => {
             res.redirect('/manage')
         })
@@ -132,6 +139,18 @@ router.post('/manage/:id/delete', checkLoggedIn, (req, res, next) => {
             next('Failed to delete listing')
         })
 })
+
+// router.post('/movies/:id/delete', (req, res, next) => {
+//     let id = req.params.id
+
+//     MovieModel.findByIdAndRemove(id)
+//         .then(() => {
+//             res.redirect('/movies');
+//         })
+//         .catch((err) => {
+//             next(err);
+//         })
+// })
 
 // ------------------------------------- //
 module.exports = router;

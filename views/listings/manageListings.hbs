@@ -3,6 +3,12 @@
 
     {{#each user.list}}
     <p>{{this.title}}</p>
+        <a href="/edit/{{user.list._id}}">
+            <p>Edit</p>
+        </a>
+        <a href="/manage/delete">
+            <p>Delete</p>
+        </a>
     {{/each}}
 
 </div>
