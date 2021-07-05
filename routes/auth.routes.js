@@ -98,6 +98,7 @@ router.post('/signup', (req, res, next) => {
             })
 })
 
+<<<<<<< HEAD
 //-------------------
 //  PAGE PERMISSIONS
 //-------------------
@@ -161,6 +162,8 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
 //  router.get('/account', checkLoggedIn, (req,res) => {
 //     res.render('account.hbs')
 //  })
+=======
+>>>>>>> 4221e91d4fe18da7fa14ab32a8afaf86c19fcd85
 
 //---------------
 //  SIGNOUT

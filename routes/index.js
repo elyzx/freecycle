@@ -2,6 +2,34 @@ const router = require("express").Router();
 
 const ListingModel = require("../models/Listing.model");
 
+//----------  MIDDLEWARE FOR PERMISSIONS ---------------
+function checkLoggedIn(req, res, next) {
+  if (req.session.loggedInUser) {
+      next()
+  }
+  else {
+      res.redirect('/login')
+  }
+}
+
+//----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
+//FIRST PAGE TO BE RENDERED AFTER LOG-IN
+router.get("/", (req, res, next) => {
+  if (req.session.loggedInUser) {
+    ListingModel.find()
+    .then((listings) => {
+      res.render("index", {listings})
+      //res.render('index.hbs', {title: req.session.loggedInUser.title} )   --- TO KEEP THE CONTENT AFTER RELOADING THE BROWSER ---
+    })
+    .catch(() => {
+      next('No available listings. Check back later!')
+    })
+  }
+  else {
+    res.redirect('/login')
+  }
+});
+
 //----------------- The code below was migrated to the auth route -------------
 /* GET home page */
 // router.get("/", (req, res, next) => {
