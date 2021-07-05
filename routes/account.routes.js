@@ -21,10 +21,13 @@ router.get('/account', checkLoggedIn, (req, res, next) => {
     const {neighbourhood} = req.body
 
     UserModel.findById(userObj._id)
+    .populate('neighbourhood')
         .then((user) => {
 
             NeighbourhoodModel.find(neighbourhood)
+            
             .then((neighbourhood) => {
+                console.log(user)
                 res.render('account.hbs', {user, neighbourhood})
             })
             .catch((err) => {

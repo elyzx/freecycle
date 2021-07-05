@@ -13,6 +13,13 @@ const express = require("express");
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
+// TO DO
+hbs.registerHelper('select', function(selected, option) {
+  console.log(selected, option)
+  return (selected == option) ? 'selected="selected"' : '';
+});
+
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
