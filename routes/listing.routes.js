@@ -11,12 +11,15 @@ const Listing = require("../models/Listing.model");
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
     if (req.session.loggedInUser) {
+        console.log(`User '${req.session.loggedInUser._id}' is logged in`)
+        req.app.locals.isLoggedIn = true;
         next()
     }
     else {
+        req.app.locals.isLoggedIn = false;
         res.redirect('/login')
     }
-}
+  }
 
 // ---------- VIEW/READ LISTINGS ---------- //
 // Handle GET request to /listings and redirect to homepage
@@ -27,13 +30,6 @@ router.get('/listings', checkLoggedIn, (req, res, next) => {
 // Handle GET request to /listings:id
 router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
-    
-    // UserModel.findById(dynamicUserId)
-
-    // UserModel.find({})
-    //     .then((user) => {
-    //         console.log(user)
-    //         res.render('listings/viewListing.hbs', {user})
     ListingModel.findById(dynamicListingId)
         .then((listing) => {
             res.render('listings/viewListing.hbs', {listing})
@@ -41,15 +37,6 @@ router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
         .catch(() => {
             next('Failed to find listing details')
         })
-
-
-        // .then((user) => {
-        //     console.log(user)
-        //     res.render('listings/viewListing.hbs', {user})
-        // })
-        // .catch(() => {
-        //     next('Failed to find user details')
-        // })
 })
 
 // Later on -- POST request to handle form submission/contact functionality
@@ -81,7 +68,7 @@ router.post('/create', (req, res, next) => {
 
                 UserModel.findByIdAndUpdate(userObj._id, { $push: {list: listing._id} }, {new: true})
                     .then(() => {
-                        res.redirect('/')
+                        res.redirect('/manage')
                     })
                     .catch(() => {
                         next('Failed to add listing to user')
@@ -97,10 +84,6 @@ router.post('/create', (req, res, next) => {
 // ---------- UPDATE LISTINGS ---------- //
 // Show the user all their active listings
 // Handle GET request to /manage listings page
-// check logged in
-// check which user
-// check the user's list of listings
-// display the info for those listings only
 router.get('/manage', checkLoggedIn, (req, res, next) => {
     let userId = req.session.loggedInUser
     console.log(req.session)
@@ -119,48 +102,84 @@ router.get('/manage', checkLoggedIn, (req, res, next) => {
 
 
 // Enable the user to edit an existing listing
-router.get('/edit', checkLoggedIn, (req, res, next) => {
+router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
     let userId = req.session.loggedInUser
+    let dynamicListingId = req.params.id
 
-    ListingModel.findById(userId._id)
-        .populate('list')
-        .then((user) => {
-            res.render('listings/editListing.hbs')
+    ListingModel.findById(dynamicListingId)
+        .then((listing) => {
+
+            if (listing.user == userId._id) {
+                console.log(listing)
+                res.render('listings/editListing.hbs', {listing})
+            } else {
+                next(`User ${userId._id} tried to edit another user's listing`)
+            }
+            
         })
-
-
-
-    res.render('listings/editListing.hbs')
+        .catch(() => {
+            next('Failed to find listing details')
+        })
 })
-// POST
+// Handles POST request to edit a listing
+router.post('/edit/:id', checkLoggedIn, (req, res, next) => {
+    let dynamicListingId = req.params.id
+    let userId = req.session.loggedInUser
+    const {title, description} = req.body
+
+    // first find the listing and check ownership
+    ListingModel.findById(dynamicListingId)
+        .then((listing) => {
+            if (listing.user == userId._id) {
+                console.log(listing)
+                // if allowed, find and update listing
+                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description}, {new: true})
+                    .then((data) => {
+                        console.log(data)
+                        res.redirect('/manage')
+                    })
+                    .catch((err) => {
+                        next(err)
+                    })
+            } else {
+                next(`User ${userId._id} tried to edit another user's listing`)
+            }
+        })
+        .catch(() => {
+            next('Failed to find listing details')
+        })
+})
 
 // ------------------------------------- //
 
 // ---------- DELETE LISTING ----------- //
 // Enable the user to delete an existing listing
-router.post('/manage/delete', checkLoggedIn, (req, res, next) => {
+router.get('/delete/:id', checkLoggedIn, (req, res, next) => {
+    let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
+    console.log('hello' + dynamicListingId + userId)
 
-    ListingModel.findByIdAndDelete(userId)
-        .then(() => {
-            res.redirect('/manage')
-        })
-        .catch(() => {
-            next('Failed to delete listing')
-        })
+   // first find the listing and check ownership
+   ListingModel.findById(dynamicListingId)
+   .then((listing) => {
+       if (listing.user == userId._id) {
+           console.log(listing)
+           // if allowed, find and delete listing
+           ListingModel.findByIdAndDelete(dynamicListingId)
+               .then(() => {
+                   res.redirect('/manage')
+               })
+               .catch((err) => {
+                   next('Failed to delete this listing.')
+               })
+       } else {
+           next(`User ${userId._id} tried to delete another user's listing`)
+       }
+   })
+   .catch(() => {
+       next('Failed to find listing details')
+   })
 })
-
-// router.post('/movies/:id/delete', (req, res, next) => {
-//     let id = req.params.id
-
-//     MovieModel.findByIdAndRemove(id)
-//         .then(() => {
-//             res.redirect('/movies');
-//         })
-//         .catch((err) => {
-//             next(err);
-//         })
-// })
 
 // ------------------------------------- //
 module.exports = router;

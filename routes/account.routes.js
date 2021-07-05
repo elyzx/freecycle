@@ -8,12 +8,15 @@ const NeighbourhoodModel = require('../models/Neighbourhood.model')
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
     if (req.session.loggedInUser) {
+        console.log(`User '${req.session.loggedInUser._id}' is logged in`)
+        req.app.locals.isLoggedIn = true;
         next()
     }
     else {
+        req.app.locals.isLoggedIn = false;
         res.redirect('/login')
     }
-}
+  }
 
 // Handle GET request to /account
 router.get('/account', checkLoggedIn, (req, res, next) => {
@@ -21,10 +24,13 @@ router.get('/account', checkLoggedIn, (req, res, next) => {
     const {neighbourhood} = req.body
 
     UserModel.findById(userObj._id)
+    .populate('neighbourhood')
         .then((user) => {
 
             NeighbourhoodModel.find(neighbourhood)
+            
             .then((neighbourhood) => {
+                console.log(user)
                 res.render('account.hbs', {user, neighbourhood})
             })
             .catch((err) => {

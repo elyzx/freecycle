@@ -1,58 +1,30 @@
 const router = require("express").Router();
 const ListingModel = require("../models/Listing.model");
 
+//----------  MIDDLEWARE FOR PERMISSIONS ---------------
+function checkLoggedIn(req, res, next) {
+  if (req.session.loggedInUser) {
+      console.log(`User '${req.session.loggedInUser._id}' is logged in`)
+      req.app.locals.isLoggedIn = true;
+      next()
+  }
+  else {
+      req.app.locals.isLoggedIn = false;
+      res.redirect('/login')
+  }
+}
+
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-router.get("/", (req, res, next) => {
-  if (req.session.loggedInUser) {
-    ListingModel.find()
+router.get("/", checkLoggedIn, (req, res, next) => {
+
+  ListingModel.find()
     .then((listings) => {
       res.render("index", {listings})
-      //res.render('index.hbs', {title: req.session.loggedInUser.title} )   --- TO KEEP THE CONTENT AFTER RELOADING THE BROWSER ---
     })
     .catch(() => {
       next('No available listings. Check back later!')
     })
-  }
-  else {
-    res.redirect('/login')
-  }
 });
-
-//----------------- The code below was migrated to the auth route -------------
-/* GET home page */
-// router.get("/", (req, res, next) => {
-//   if (req.session.loggedInUser) {
-//     ListingModel.find()
-//     .then((listings) => {
-//       res.render("index", {listings})
-//     })
-//     .catch(() => {
-//       next('No available listings. Check back later!')
-//     })
-//   }
-//   else {
-//     res.redirect('/login')
-//   }
-// });
-//----------------- The code above was migrated to the auth route -------------
-
-
-//----------------- The code below - in the case that a dynamic rendering is required -------------
-// router.get("/:id", (req, res, next) => {
-//   if (req.session.loggedInUser) {
-//     ListingModel.find()
-//     .then((listings) => {
-//       res.render("index", {listings})
-//     })
-//     .catch(() => {
-//       next('No available listings. Check back later!')
-//     })
-//   }
-//   else {
-//     res.redirect('/login')
-//   }
-// });
-//----------------- The code above - in the case that a dynamic rendering is required -------------
 
 module.exports = router;
