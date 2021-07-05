@@ -1,16 +1,5 @@
 const router = require("express").Router();
-
 const ListingModel = require("../models/Listing.model");
-
-//----------  MIDDLEWARE FOR PERMISSIONS ---------------
-function checkLoggedIn(req, res, next) {
-  if (req.session.loggedInUser) {
-      next()
-  }
-  else {
-      res.redirect('/login')
-  }
-}
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN

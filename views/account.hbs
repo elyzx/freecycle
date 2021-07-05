@@ -14,12 +14,12 @@
     </div>
 
     <div class="mb-3">
-      <label for="exampleInputNeighbourhood" class="form-label">Neighbourhood</label>
-      <select class="form-select" value="{{neighbourhood.name}}" aria-label="Default select example">
-            {{#each neighbourhood}}
-              <option selected> Open this select menu</option>
-              <option value="{{this._id}}">{{this.neighbourhood}}</option>
-            {{/each}}
+      <label for="neighbourhood" class="form-label">Neighbourhood</label>
+      <select class="form-select" name="neighbourhood" value="{{user.neighbourhood}}" aria-label="Default select example">
+              <option selected> Select </option>
+              {{#each neighbourhood}}
+              <option value="{{this._id}}">{{this.name}}</option>
+              {{/each}}
       </select>
     </div>
 

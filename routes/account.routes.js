@@ -16,11 +16,11 @@ function checkLoggedIn(req, res, next) {
 }
 
 // Handle GET request to /account
-router.get('/account/:id', checkLoggedIn, (req, res, next) => {
-    let dynamicUserId = req.params.id
+router.get('/account', checkLoggedIn, (req, res, next) => {
+    let userObj = req.session.loggedInUser
     const {name, email, neighbourhood} = req.body
 
-    UserModel.findById(dynamicUserId)
+    UserModel.findById(userObj._id)
         .then((user) => {
 
             NeighbourhoodModel.find(neighbourhood)
@@ -38,14 +38,14 @@ router.get('/account/:id', checkLoggedIn, (req, res, next) => {
 })
 
 // Handle POST request for /account
-router.post('/account/:id', checkLoggedIn, (req, res, next) => {
-    let dynamicListingId = req.params.id
+router.post('/account', checkLoggedIn, (req, res, next) => {
+    let userObj = req.session.loggedInUser
 
     const {name, email, neighbourhood} = req.body
 
-    UserModel.findByIdAndUpdate(dynamicListingId, {name, email, neighbourhood})
+    UserModel.findByIdAndUpdate(userObj._id, {name, email, neighbourhood}, {new: false})
         .then(() => {
-            res.redirect()
+            res.redirect('/')
         })
         .catch((err) => {
             next(err)
