@@ -11,6 +11,7 @@ const ListingModel = require("../models/Listing.model");
 // require bcrypt for password encryption
 const bcrypt = require('bcryptjs');
 
+
 //---------------
 //  LOGN-IN
 //---------------

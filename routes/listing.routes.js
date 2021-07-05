@@ -69,17 +69,23 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
 
 // Add form submissions to DB & redirect user to Manage page
 // Handle POST requests to /create listings page 
-router.post('/create/:id', (req, res, next) => {
-    const id = req.params.id
+router.post('/create', (req, res, next) => {
+    let userObj = req.session.loggedInUser
+    console.log(req.session)
     const {title, description, neighbourhood} = req.body
 
     // Add the listing to our DB
-    ListingModel.create({title, description, neighbourhood, user: id})
-        .then(() => {
-            //     { _id: listing_.id},
-            //     { $push: {list: listing} },
-            // )
-            res.redirect('/')
+    ListingModel.create({title, description, neighbourhood, user: userObj._id})
+        .then((listing) => {
+                console.log(listing._id)
+
+                UserModel.findByIdAndUpdate(userObj._id, { $push: {list: listing._id} }, {new: true})
+                    .then(() => {
+                        res.redirect('/')
+                    })
+                    .catch(() => {
+                        next('Failed to add listing to user')
+                    })
         })
         .catch(() => {
             next('Failed to create new listing')
@@ -92,7 +98,7 @@ router.post('/create/:id', (req, res, next) => {
 // Show the user all their active listings
 // Handle GET request to /manage listings page
 router.get('/manage', checkLoggedIn, (req, res, next) => {
-    let userId = req.session.userInfo
+    let userId = req.session.loggedInUser
     console.log(req.session)
     
     UserModel.findById(userId)
