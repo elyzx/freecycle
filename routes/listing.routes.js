@@ -76,8 +76,6 @@ router.post('/create/:id', (req, res, next) => {
     // Add the listing to our DB
     ListingModel.create({title, description, neighbourhood, user: id})
         .then(() => {
-            // push the listing id to the user model
-            // UserModel.update(
             //     { _id: listing_.id},
             //     { $push: {list: listing} },
             // )
@@ -88,8 +86,6 @@ router.post('/create/:id', (req, res, next) => {
         })
 })
 // ------------------------------------- //
-// hi!
-// attempt no 2
 
 
 // ---------- UPDATE LISTINGS ---------- //
