@@ -2,8 +2,10 @@
 const router = require("express").Router();
 // Require listing model
 const ListingModel = require("../models/Listing.model");
-// User model
+// Require User model
 const UserModel = require("../models/User.model");
+// Require Neighbourhood model
+const NeighbourhoodModel = require("../models/Neighbourhood.model");
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -25,6 +27,12 @@ router.get('/listings', checkLoggedIn, (req, res, next) => {
 router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     
+    // UserModel.findById(dynamicUserId)
+
+    // UserModel.find({})
+    //     .then((user) => {
+    //         console.log(user)
+    //         res.render('listings/viewListing.hbs', {user})
     ListingModel.findById(dynamicListingId)
         .then((listing) => {
             res.render('listings/viewListing.hbs', {listing})
@@ -32,24 +40,47 @@ router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
         .catch(() => {
             next('Failed to find listing details')
         })
+
+
+        // .then((user) => {
+        //     console.log(user)
+        //     res.render('listings/viewListing.hbs', {user})
+        // })
+        // .catch(() => {
+        //     next('Failed to find user details')
+        // })
 })
 
 // Later on -- POST request to handle form submission/contact functionality
 
+
 // ---------- CREATE LISTINGS ---------- //
 // Handle GET requests to /create listings page
 router.get('/create', checkLoggedIn, (req, res, next) => {
-    res.render('listings/createListing.hbs')
+    
+    NeighbourhoodModel.find({})
+    .then((neighbourhood) => {
+        res.render('listings/createListing.hbs', {neighbourhood})
+    })
+     .catch((err) => {
+        next(err)
+     })
 })
 
 // Add form submissions to DB & redirect user to Manage page
 // Handle POST requests to /create listings page 
-router.post('/create', checkLoggedIn, (req, res, next) => {
-    const {title, description} = req.body
+router.post('/create/:id', (req, res, next) => {
+    const id = req.params.id
+    const {title, description, neighbourhood} = req.body
 
     // Add the listing to our DB
-    ListingModel.create({title, description})
+    ListingModel.create({title, description, neighbourhood, user: id})
         .then(() => {
+            // push the listing id to the user model
+            // UserModel.update(
+            //     { _id: listing_.id},
+            //     { $push: {list: listing} },
+            // )
             res.redirect('/')
         })
         .catch(() => {

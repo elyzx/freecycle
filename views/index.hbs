@@ -1,10 +1,20 @@
 <div class="main-container"> 
     <h1>Rehome goods in your Neighbourhood</h1>
 
+    
+<!--
     {{#each listings}}
         <a href="/listings/{{this._id}}">
             <p>{{this.title}}</p>
             <p>{{this.description}}</p>
+        </a>
+    {{/each}}
+
+-->
+
+ {{#each listings}}
+        <a href="/listings/{{this._id}}">
+            <p>{{this.title}}</p>
         </a>
     {{/each}}
     
