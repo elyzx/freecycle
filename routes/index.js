@@ -5,10 +5,15 @@ const ListingModel = require("../models/Listing.model");
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
 router.get("/", (req, res, next) => {
   if (req.session.loggedInUser) {
+
     ListingModel.find()
+    .populate('neighbourhood')
     .then((listings) => {
+      
+      console.log(listings.title)
+
       res.render("index", {listings})
-      //res.render('index.hbs', {title: req.session.loggedInUser.title} )   --- TO KEEP THE CONTENT AFTER RELOADING THE BROWSER ---
+     
     })
     .catch(() => {
       next('No available listings. Check back later!')
