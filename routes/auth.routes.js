@@ -119,22 +119,6 @@ function checkLoggedIn(req, res, next) {
 //     }
 // })
 
-// OTHER PAGES
-router.get('/manage', checkLoggedIn, (req,res) => {
-   res.render('listings/manageListings.hbs')
-})
-
-router.get('/edit', checkLoggedIn, (req,res) => {
-    res.render('listings/editListing.hbs')
- })
-
- router.get('/create', checkLoggedIn, (req,res) => {
-    res.render('listings/createListing.hbs')
- })
-
- router.get('/account', checkLoggedIn, (req,res) => {
-    res.render('account.hbs')
- })
 
 //----------  DESTROY THE SESSION ---------------
 router.get('/logout', (req, res, next) => {
