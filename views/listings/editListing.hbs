@@ -1,27 +1,29 @@
 <div class="main-container">
   <h1>Edit Listing</h1>
 
-  <form method="POST" action="/edit">
+  <a href="/manage" class="btn secondary-button">Back</a>
+
+  <form method="POST" action="/edit/{{listing._id}}">
 
     <div class="mb-3">
       <label for="exampleInputTitle" class="form-label">Item Name</label>
-      <input type="text" name="title" value="" class="form-control" id="exampleInputTitle">
+      <input type="text" name="title" value="{{listing.title}}" class="form-control" id="exampleInputTitle" required>
     </div>
 
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-      <textarea class="form-control" name="description" value="" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required>{{listing.description}}</textarea>
     </div>
 
     <!-- Add photo upload here -->
 
     <div class="mb-3">
-      <label for="exampleInputNeighbourhood" class="form-label">Select your neighbourhood</label>
-      <select class="form-select" value="" aria-label="Default select example">
-        {{#each neighbourhood}}
-          <option selected> Open this select menu</option>
-          <option value="{{this._id}}">{{this.neighbourhood}}</option>
-        {{/each}}
+      <label for="neighbourhood" class="form-label">Neighbourhood</label>
+      <select class="form-select" name="neighbourhood" value="{{listing.neighbourhood}}" aria-label="Default select example" required>
+        <option value="">Select...</option>
+          {{#each neighbourhood}}
+            <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
       </select>
   </div>
 

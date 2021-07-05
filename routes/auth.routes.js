@@ -33,11 +33,11 @@ router.post('/login', (req, res, next) => {
                     res.redirect('/')
                 }
                 else {
-                    res.render('auth/login', {error: 'Invalid password'})
+                    res.render('auth/login', {error: 'Invalid password. Please check and try again!'})
                 } 
             } 
             else {
-                res.render('auth/login', {error: 'Email does not exist'})
+                res.render('auth/login', {error: 'Email does not exist. Please check and try again!'})
             }
         })
         .catch((error) => {
