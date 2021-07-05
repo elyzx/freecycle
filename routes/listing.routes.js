@@ -55,26 +55,6 @@ router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
 
 
 // ---------- CREATE LISTINGS ---------- //
-<<<<<<< HEAD
-//Handle GET requests to /create listings page
-
-//----------------- The code below was migrated to the auth route -------------
-// router.get('/create',  (req, res, next) => {
-//     console.log('is this working?')
-//     NeighbourhoodModel.find({})
-//     .then((neighbourhood) => {
-//         console.log(neighbourhood)
-
-//         res.render('listings/createListing.hbs', {neighbourhood})
-//     })
-//      .catch((err) => {
-//         next(err)
-//      })
-// })
-//----------------- The code above was migrated to the auth route -------------
-
-
-=======
 // Handle GET requests to /create listings page
 router.get('/create', checkLoggedIn, (req, res, next) => {
     
@@ -86,7 +66,6 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
         next(err)
      })
 })
->>>>>>> 4221e91d4fe18da7fa14ab32a8afaf86c19fcd85
 
 // Add form submissions to DB & redirect user to Manage page
 // Handle POST requests to /create listings page 
