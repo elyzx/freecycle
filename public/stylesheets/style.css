@@ -85,7 +85,33 @@ h3 {
   width: 100%;
 }
 
+.cards {
+  padding-top: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 
+.cardsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.tableCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Footer */
 footer {

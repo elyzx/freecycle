@@ -1,13 +1,16 @@
 <div class="main-container"> 
     <h1>Rehome goods in your Neighbourhood</h1>
 
- {{#each listings}}
+<div class="cards">
+    {{#each listings}}
+    <div class="cardsItem">
         <img class="img-size" src={{this.photo}} alt="list image">
     
         <a href="/listings/{{this._id}}">
             <p>{{this.title}}</p>
         </a> 
-
-{{/each}}
+    </div>
+    {{/each}}
+</div>
     
 </div>

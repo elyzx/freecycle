@@ -1,15 +1,19 @@
 <div class="main-container">
     <h1>Manage Listings</h1>
 
-    {{#each user.list}}
-    <img class="img-size" src={{this.photo}} alt="list image">
-    <p>{{this.title}}</p>
-        <a href="/edit/{{this._id}}">
-            <p>Edit</p>
-        </a>
-        <a href="/delete/{{this._id}}">
-            <p>Delete</p>
-        </a>
+    <div class="table">
+        {{#each user.list}}
+        <div class="tableCard">
+            <img class="img-size" src={{this.photo}} alt="list image">
+            <p>{{this.title}}</p>
+            <a href="/edit/{{this._id}}">
+                <p>Edit</p>
+            </a>
+            <a href="/delete/{{this._id}}">
+                <p>Delete</p>
+            </a>
+        </div>
     {{/each}}
+    </div>
 
 </div>

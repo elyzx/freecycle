@@ -28,7 +28,7 @@ require("./config")(app);
 const projectName = "Freecycle";
 const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();
 
-app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
+app.locals.title = `${capitalized(projectName)}`;
 
 // -------------------------------------------------
 const session = require('express-session');
