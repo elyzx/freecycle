@@ -13,11 +13,19 @@ const express = require("express");
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
+//-------------------- registerHelper -----------------------
 // TO DO
 hbs.registerHelper('select', function(selected, option) {
   console.log(selected, option)
   return (selected == option) ? 'selected="selected"' : '';
 });
+
+hbs.registerHelper('select', function(selected, value) {
+
+  return (selected == value) ? selected : '';
+});
+
+//-------------------- registerHelper -----------------------
 
 const app = express();
 
