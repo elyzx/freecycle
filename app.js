@@ -19,14 +19,13 @@ hbs.registerHelper('select', function(selected, option) {
   return (selected == option) ? 'selected="selected"' : '';
 });
 
-
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
 // default value for title local
-const projectName = "module2-project";
+const projectName = "Freecycle";
 const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowerCase();
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
@@ -48,6 +47,7 @@ app.use(session({
     })
   }));
 // -------------------------------------------------
+
 
 // 👇 Start handling routes here
 const index = require("./routes/index");

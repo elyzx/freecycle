@@ -7,6 +7,8 @@ const UserModel = require("../models/User.model");
 // Require Neighbourhood model
 const NeighbourhoodModel = require("../models/Neighbourhood.model");
 const Listing = require("../models/Listing.model");
+// Require nodemailer
+const nodemailer = require('nodemailer')
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -39,7 +41,39 @@ router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
         })
 })
 
-// Later on -- POST request to handle form submission/contact functionality
+router.post('/send-email/:title', (req, res, next) => {
+    let userObj = req.session.loggedInUser
+    let dynamicListingTitle = req.params.title
+    console.log(dynamicListingTitle)
+    let { name, email, subject, message } = req.body;
+
+    UserModel.findById(userObj)
+    .then(() => {
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'freecycle.ironhack@gmail.com',
+              pass: process.env.EMAIL_PASSWORD
+            }
+          });
+          transporter.sendMail({
+            from: '"Freecycle - Item Request" <freecycle.ironhack@gmail.com}>',
+            to: userObj.email,
+            subject: `RE: ${dynamicListingTitle}`,
+            text: `From: ${name}<b></b>Email: ${email}<b></b>Message: ${message}`,
+            html: `From: ${name} <b></b>Email: ${email} <b></b>Message: ${message}`
+          })
+          .then(() => {
+            res.render('listings/emailConfirmation.hbs', {email, subject, message})
+          })
+          .catch((err => {
+              next(err)
+          }))
+    })
+    .catch((err) => {
+        next(err)
+    })
+});
 
 
 // ---------- CREATE LISTINGS ---------- //
@@ -86,7 +120,6 @@ router.post('/create', (req, res, next) => {
 // Handle GET request to /manage listings page
 router.get('/manage', checkLoggedIn, (req, res, next) => {
     let userId = req.session.loggedInUser
-    console.log(req.session)
 
     UserModel.findById(userId)
         .populate('list')
