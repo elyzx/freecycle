@@ -1,7 +1,7 @@
 <div class="main-container">
   <h1>Create Listing</h1>
 
-  <form method="POST" action="/create">
+  <form method="POST" action="/create" enctype="multipart/form-data">
 
     <div class="mb-3">
       <label for="exampleInputTitle" class="form-label">Item Name</label>
@@ -14,6 +14,11 @@
     </div>
 
     <!-- Add photo upload here -->
+    <div>   
+        <input type="file" name="photo" accept="image/png, image/jpg">
+    </div>
+    <!-- Add photo upload here -->
+
 
     <div class="mb-3">
       <label for="neighbourhood" class="form-label">Neighbourhood</label>

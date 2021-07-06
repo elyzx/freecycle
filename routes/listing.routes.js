@@ -10,6 +10,9 @@ const Listing = require("../models/Listing.model");
 // Require nodemailer
 const nodemailer = require('nodemailer')
 
+// Cloudinary congig file
+const uploader = require('../middlewares/cloudinary.config.js');
+
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
     if (req.session.loggedInUser) {
@@ -91,12 +94,13 @@ router.get('/create', checkLoggedIn, (req, res, next) => {
 
 // Add form submissions to DB & redirect user to Manage page
 // Handle POST requests to /create listings page 
-router.post('/create', (req, res, next) => {
+router.post('/create', uploader.single("photo"), (req, res, next) => {
     let userObj = req.session.loggedInUser
     const {title, description, neighbourhood} = req.body
-
+    const photo = req.file.path
+ 
     // Add the listing to our DB
-    ListingModel.create({title, description, neighbourhood, user: userObj._id})
+    ListingModel.create({title, description, neighbourhood, photo, user: userObj._id})
         .then((listing) => {
                 console.log(listing._id)
 
@@ -124,7 +128,6 @@ router.get('/manage', checkLoggedIn, (req, res, next) => {
     UserModel.findById(userId)
         .populate('list')
         .then((user) => {
-            console.log(userId)
             res.render('listings/manageListings.hbs', {user})
         })
         .catch(() => {
@@ -155,10 +158,11 @@ router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
         })
 })
 // Handles POST request to edit a listing
-router.post('/edit/:id', checkLoggedIn, (req, res, next) => {
+router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
     const {title, description} = req.body
+    const photo = req.file.path
 
     // first find the listing and check ownership
     ListingModel.findById(dynamicListingId)
@@ -166,7 +170,7 @@ router.post('/edit/:id', checkLoggedIn, (req, res, next) => {
             if (listing.user == userId._id) {
                 console.log(listing)
                 // if allowed, find and update listing
-                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description}, {new: true})
+                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description, photo}, {new: true})
                     .then((data) => {
                         console.log(data)
                         res.redirect('/manage')

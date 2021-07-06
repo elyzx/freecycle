@@ -16,10 +16,16 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-router.get("/", checkLoggedIn, (req, res, next) => {
+router.get("/", checkLoggedIn,  (req, res, next) => {
+
 
   ListingModel.find()
+    .populate('neighbourhood')
+    .populate('user')
     .then((listings) => {
+      
+      console.log(listings)
+
       res.render("index", {listings})
     })
     .catch(() => {
