@@ -1,9 +1,9 @@
 <div class="main-container">
   <h1>Edit Listing</h1>
 
-  <a href="/manage" class="btn secondary-button">Back</a>
+  <a href="/manage" class="btn secondary-button">Back </a>
 
-  <form method="POST" action="/edit/{{listing._id}}">
+  <form method="POST" action="/edit/{{listing._id}}" enctype="multipart/form-data">
 
     <div class="mb-3">
       <label for="exampleInputTitle" class="form-label">Item Name</label>
@@ -15,6 +15,10 @@
       <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required>{{listing.description}}</textarea>
     </div>
 
+    <!-- Add photo upload here -->
+    <div>   
+        <input type="file" name="photo" accept="image/png, image/jpg">
+    </div>
     <!-- Add photo upload here -->
 
     <div class="mb-3">

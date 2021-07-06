@@ -125,10 +125,11 @@ router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
         })
 })
 // Handles POST request to edit a listing
-router.post('/edit/:id', checkLoggedIn, (req, res, next) => {
+router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
     const {title, description} = req.body
+    const photo = req.file.path
 
     // first find the listing and check ownership
     ListingModel.findById(dynamicListingId)
@@ -136,7 +137,7 @@ router.post('/edit/:id', checkLoggedIn, (req, res, next) => {
             if (listing.user == userId._id) {
                 console.log(listing)
                 // if allowed, find and update listing
-                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description}, {new: true})
+                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description, photo}, {new: true})
                     .then((data) => {
                         console.log(data)
                         res.redirect('/manage')
