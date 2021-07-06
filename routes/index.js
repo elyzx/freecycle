@@ -16,26 +16,16 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
-<<<<<<< HEAD
-router.get("/", (req, res, next) => {
-  if (req.session.loggedInUser) {
-
-    ListingModel.find()
-    .populate('neighbourhood')
-=======
 router.get("/", checkLoggedIn, (req, res, next) => {
 
   ListingModel.find()
->>>>>>> 309a8bccb1dd12ed749c40055f7379d5f3bd946c
+    .populate('neighbourhood')
+    .populate('user')
     .then((listings) => {
       
-      console.log(listings.title)
+      console.log(listings)
 
       res.render("index", {listings})
-<<<<<<< HEAD
-     
-=======
->>>>>>> 309a8bccb1dd12ed749c40055f7379d5f3bd946c
     })
     .catch(() => {
       next('No available listings. Check back later!')
