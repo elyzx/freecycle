@@ -13,6 +13,8 @@ const nodemailer = require('nodemailer')
 // Cloudinary congig file
 const uploader = require('../middlewares/cloudinary.config.js');
 
+const templates = require('../templates/template.js')
+
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
     if (req.session.loggedInUser) {
@@ -64,8 +66,9 @@ router.post('/send-email/:title', (req, res, next) => {
             from: '"Freecycle - Item Request" <freecycle.ironhack@gmail.com}>',
             to: userObj.email,
             subject: `RE: ${dynamicListingTitle}`,
-            text: `From: ${name}<b></b>Email: ${email}<b></b>Message: ${message}`,
-            html: `From: ${name} <b></b>Email: ${email} <b></b>Message: ${message}`
+            text: `Name: ${name}. Email: ${email}. Message: ${message}`,
+            html: `Name ${name}. Email: ${email}. Message: ${message}`,
+            // html: templates.templateExample(name, email, message)
           })
           .then(() => {
             res.render('listings/emailConfirmation.hbs', {email, subject, message})
