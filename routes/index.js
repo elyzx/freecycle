@@ -28,8 +28,8 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
     .populate('user')
     .then((listings) => {
       UserModel.findById(req.session.loggedInUser._id)
+        .populate('neighbourhood')
         .then((user) => {
-
       const listingsMap = listings.map(x => x) 
       
 
@@ -37,7 +37,7 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
       let matchId = [];
 
       for( let i = 0; i < listingsMap.length; i++ ) {
-        if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood.toString()){
+        if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood._id.toString()){
           matchId.push(listingsMap[i])
         }
         console.log(typeof user.neighbourhood, 'this is the user in the for loop')
@@ -46,7 +46,10 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
 
       console.log(matchId)
 
-        res.render("index", {matchId})
+        res.render("index", {
+          matches: matchId,
+          neighbourhood_name: user.neighbourhood.name,
+        })
 
         })
         .catch((err) => {
