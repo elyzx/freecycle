@@ -3,7 +3,7 @@
 
     <div class="table">
         {{#each user.list}}
-            <div class="tableCard">
+            <div class="table-card">
                 <img class="img-size" src={{this.photo}} alt="list image">
                 <p>{{this.title}}</p>
                 <a href="/edit/{{this._id}}">
@@ -14,7 +14,7 @@
                 </a>
             </div>
         {{else}}
-        <div class="noListings">
+        <div class="no-listings">
             <div class="padding">
                 <h3>No listings available.</h3> 
             </div>

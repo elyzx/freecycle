@@ -3,12 +3,13 @@
 
 <div class="cards">
     {{#each listings}}
-    <div class="cardsItem">
-        <img class="img-size" src={{this.photo}} alt="list image">
-    
+    <div class="cards-item">
+
         <a href="/listings/{{this._id}}">
+            <img class="img-size" src={{this.photo}} alt="list image">
             <p>{{this.title}}</p>
         </a> 
+        
     </div>
     {{/each}}
 </div>

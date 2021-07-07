@@ -31,6 +31,11 @@ h3 {
   color: #073b4c;
 }
 
+h4 {
+  size: 22px;
+  color: #073b4c;
+}
+
 /* Navigation */
 .navbar {
   padding-left: 40px;
@@ -77,7 +82,7 @@ h3 {
 /* Body */
 .main-container {
   display: block;
-  padding: 50px;
+  padding: 2rem;
   flex: 1;
 }
 
@@ -91,18 +96,39 @@ h3 {
   width: 100%;
 }
 
-.cards {
-  padding-top: 3rem;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+.img-size {
+  width: 150px;
 }
 
-.cardsItem {
+.img-size-bigger {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.listing-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 50px;
+}
+
+.cards {
+  padding-top: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.cards-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
 }
 
 .table {
@@ -112,14 +138,14 @@ h3 {
   justify-content: space-evenly;
 }
 
-.tableCard {
+.table-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.noListings {
+.no-listings {
   padding: 4rem;
   display: flex;
   flex-direction: column;
@@ -130,6 +156,7 @@ h3 {
 .padding {
   padding: 20px;
 }
+
 
 /* Footer */
 .footer {
@@ -150,11 +177,4 @@ h3 {
 
 .footer-item:hover{
   color: #073b4c;
-}
-
-.img-size {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 150px; /* Set a small width */;
 }
