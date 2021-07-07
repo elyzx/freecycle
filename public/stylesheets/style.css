@@ -8,6 +8,11 @@ body {
 
 a {
   color: #118ab2;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #073b4c;
 }
 
 h1 {
@@ -73,6 +78,7 @@ h3 {
 .main-container {
   display: block;
   padding: 50px;
+  flex: 1;
 }
 
 .error {
@@ -114,16 +120,17 @@ h3 {
 }
 
 /* Footer */
-footer {
+.footer {
   display: flex;
   justify-content: space-around;
   margin-top: auto; 
   align-items: center;
-  padding: 25px;
+  padding: 10px;
   background-color: #F8FAFA;
 }
 
 .footer-item {
+  padding-top: 10px;
   text-decoration: none;
   cursor: pointer;
   color: #118ab2;
