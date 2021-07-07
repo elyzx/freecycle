@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const ListingModel = require("../models/Listing.model");
+const UserModel = require("../models/User.model");
+
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -16,17 +18,53 @@ function checkLoggedIn(req, res, next) {
 
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
+
 router.get("/", checkLoggedIn,  (req, res, next) => {
 
-
+  //const userAdressId = req.session.loggedInUser
+ 
   ListingModel.find()
     .populate('neighbourhood')
     .populate('user')
     .then((listings) => {
-      
-      console.log(listings)
+      UserModel.findById(req.session.loggedInUser._id)
+        .then((user) => {
 
-      res.render("index", {listings})
+          
+          
+      //const userMap = user.map(x => x.neighbourhood)
+      //console.log(userMap)
+
+      //console.log(user.neighbourhood, 'this is the user neighbourhood')
+
+      const listingsMap = listings.map(x => x.neighbourhood._id);
+
+      let matchId = [];
+
+      for( let i = 0; i < listingsMap.length; i++ ) {
+        if(listingsMap[i].toString() == user.neighbourhood.toString()){
+          matchId.push(listingsMap[i])
+
+        }
+        console.log(typeof user.neighbourhood, 'this is the user in the for loop')
+        console.log(typeof listingsMap[i], 'this is the list in the for loop')
+        console.log(matchId)
+      }
+
+      console.log(matchId)
+
+      console.log(listingsMap, 'User id address')
+
+        res.render("index", {matchId})
+     
+
+
+        })
+        .catch((err) => {
+          next(err)
+        })
+
+    
     })
     .catch(() => {
       next('No available listings. Check back later!')
