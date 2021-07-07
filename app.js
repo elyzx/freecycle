@@ -20,11 +20,6 @@ hbs.registerHelper('select', function(selected, option) {
   return (selected == option) ? 'selected="selected"' : '';
 });
 
-hbs.registerHelper('select', function(selected, value) {
-
-  return (selected == value) ? selected : '';
-});
-
 //-------------------- registerHelper -----------------------
 
 const app = express();
