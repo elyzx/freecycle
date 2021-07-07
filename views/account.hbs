@@ -28,14 +28,14 @@
 
   </form>
 
-  {{#if error}}
-      <p class="error">{{error}}</p>
-  {{/if}}
-
   <div class="padding-above">
     <a href="/account/delete/{{user._id}}">
       <p>Delete Account</p>
     </a>
   </div>
+  
+  {{#if error}}
+      <p class="error">{{error}}</p>
+  {{/if}}
 
 </div>
