@@ -18,10 +18,7 @@
       <select class="form-select" name="neighbourhood" value="{{user.neighbourhood}}" aria-label="Default select example">
               {{#each neighbourhood}}
               
-
                 <option value="{{this._id}}" {{{select user this.name}}}>{{this.name}}</option>
-
-
 
               {{/each}}
       </select>
@@ -34,5 +31,11 @@
   {{#if error}}
       <p class="error">{{error}}</p>
   {{/if}}
+
+  <div class="padding-above">
+    <a href="/account/delete/{{user._id}}">
+      <p>Delete Account</p>
+    </a>
+  </div>
 
 </div>

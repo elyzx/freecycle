@@ -92,7 +92,7 @@ router.post('/register', (req, res, next) => {
 
         UserModel.create({name, email, neighbourhood, password: hash})
             .then(() => {
-                res.redirect('/')
+                res.redirect('/login')
             })
             .catch((err) => {
                 next(err)

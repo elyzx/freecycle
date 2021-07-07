@@ -60,4 +60,24 @@ router.post('/account', checkLoggedIn, (req, res, next) => {
         })
 })
 
+// Delete account
+router.get('/account/delete/:id', checkLoggedIn, (req, res, next) => {
+    let userId = req.session.loggedInUser
+    let dynamicAccountId = req.params.id
+
+    if (userId._id != dynamicAccountId) {
+        return next(`User ${userId._id} tried to delete another user's account :(`)
+    }
+    
+    UserModel.findByIdAndDelete(userId)
+    .then(() => {
+        req.session.destroy()
+        req.app.locals.isLoggedIn = false;
+        res.redirect('/')
+    })
+    .catch(() => {
+        next('Failed to delete user account.')
+    })
+})
+
 module.exports = router;
