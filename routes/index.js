@@ -12,7 +12,7 @@ function checkLoggedIn(req, res, next) {
   }
   else {
       req.app.locals.isLoggedIn = false;
-      res.redirect('/login')
+      res.redirect('/register')
   }
 }
 

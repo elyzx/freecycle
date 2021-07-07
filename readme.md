@@ -16,11 +16,11 @@ A free marketplace for rehoming unwanted items, Freecycle makes it easy to conne
 * body: Email Address, Password
 * if successful, render homepage.hbsgit 
 
-##### GET /signup
+##### GET /register
 * if user already logged in, redirect to homepage.hbs
-* otherwise, render signup.hbs
+* otherwise, render register.hbs
 
-##### POST /signup
+##### POST /register
 * body: Name, Email Address, Password, NeighbourhoodRef
 * redirect to login.hbs
 
@@ -74,7 +74,7 @@ A free marketplace for rehoming unwanted items, Freecycle makes it easy to conne
 
 ##### POST /account/:id
 * delete profile
-* redirect to signup.hbs
+* redirect to register.hbs
 
 
 ## Models
