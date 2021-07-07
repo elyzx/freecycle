@@ -47,15 +47,11 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
       console.log(matchId)
 
         res.render("index", {matchId})
-     
-
 
         })
         .catch((err) => {
           next(err)
         })
-
-    
     })
     .catch(() => {
       next('No available listings. Check back later!')
