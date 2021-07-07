@@ -42,12 +42,9 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
         }
         console.log(typeof user.neighbourhood, 'this is the user in the for loop')
         console.log(typeof listingsMap[i], 'this is the list in the for loop')
-        console.log(matchId)
       }
 
       console.log(matchId)
-
-      console.log(listingsMap, 'User id address')
 
         res.render("index", {matchId})
      
