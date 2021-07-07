@@ -36,6 +36,7 @@ router.get('/listings', checkLoggedIn, (req, res, next) => {
 router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     ListingModel.findById(dynamicListingId)
+        .populate('neighbourhood')
         .then((listing) => {
             res.render('listings/viewListing.hbs', {listing})
         })
