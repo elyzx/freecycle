@@ -95,7 +95,19 @@ router.post('/register', (req, res, next) => {
                 res.redirect('/login')
             })
             .catch((err) => {
-                next(err)
+                console.log(err)
+                if (err.name === 'MongoError' && err.code === 11000) {
+                    NeighbourhoodModel.find({})
+                    .then((neighbourhood) => {
+                        console.log(neighbourhood)
+                        res.render('auth/register.hbs', {neighbourhood, error: "Email already registered."})
+                    })
+                    .catch((err) => {
+                        next(err)
+                    })
+                } else {
+                    next(err)
+                }
             })
 })
 
