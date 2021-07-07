@@ -1,14 +1,20 @@
 <div class="main-container"> 
     <h1>Rehome goods in your Neighbourhood</h1>
 
- {{#each matchId}} 
- 
-        <img class="img-size" src={{this.photo}} alt="list image">
+    <div class="cards">
+        {{#each matchId}} 
+
+            <div class="cards-item">
+                <img class="img-size" src={{this.photo}} alt="list image">
     
-        <a href="/listings/{{this._id}}">
-            <p>{{this.title}}</p>
-        </a> 
+                <a href="/listings/{{this._id}}">
+                    <p>{{this.title}}</p>
+                </a> 
+
+            </div>
     
-{{/each}}
+        {{/each}}
+
+    </div>
     
 </div>

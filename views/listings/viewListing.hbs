@@ -1,14 +1,14 @@
-<div class="main-container"> 
+<div class="main-container">
+    <a href="/" class="btn secondary-button">Back</a>
 
-    <a href="/" class="btn secondary-button">Back to Homepage</a>
+    <div class="listing-info">
+        <img class="img-size-bigger" src={{listing.photo}} alt="list image">
+        <h2>{{listing.title}}</h2>
+        <p>Available in {{listing.neighbourhood.name}}</p>
+        <p>{{listing.description}}</p>
+    </div>
 
-    <img class="img-size" src={{listing.photo}} alt="list image">
-
-    <h2>{{listing.title}}</h2>
-
-    <p>{{listing.description}}</p>
-
-    <h3>Request Item</h3>
+    <h4>Request Item</h4>
     <p>Get in touch with the owner by filling out the form below.</p>
         <form action="/send-email/{{listing.title}}" method="post">
 

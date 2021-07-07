@@ -6,7 +6,8 @@ require('./Neighbourhood.model');
 const userSchema = new Schema({
   name: String,
   email: {
-    type: String
+    type: String,
+    unique: true
   },
   password: String,
   neighbourhood:  {
