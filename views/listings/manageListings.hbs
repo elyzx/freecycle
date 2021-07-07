@@ -3,17 +3,24 @@
 
     <div class="table">
         {{#each user.list}}
-        <div class="tableCard">
-            <img class="img-size" src={{this.photo}} alt="list image">
-            <p>{{this.title}}</p>
-            <a href="/edit/{{this._id}}">
-                <p>Edit</p>
-            </a>
-            <a href="/delete/{{this._id}}">
-                <p>Delete</p>
-            </a>
+            <div class="tableCard">
+                <img class="img-size" src={{this.photo}} alt="list image">
+                <p>{{this.title}}</p>
+                <a href="/edit/{{this._id}}">
+                    <p>Edit</p>
+                </a>
+                <a href="/delete/{{this._id}}">
+                    <p>Delete</p>
+                </a>
+            </div>
+        {{else}}
+        <div class="noListings">
+            <div class="padding">
+                <h3>No listings available.</h3> 
+            </div>
+            <a href="/create" class="btn primary-button">Create Listing</a>
         </div>
-    {{/each}}
+        {{/each}}
     </div>
 
 </div>

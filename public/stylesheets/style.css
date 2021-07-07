@@ -119,6 +119,18 @@ h3 {
   justify-content: center;
 }
 
+.noListings {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.padding {
+  padding: 20px;
+}
+
 /* Footer */
 .footer {
   display: flex;
