@@ -3,9 +3,9 @@
 
     <div class="table">
         {{#each user.list}}
-            <div class="table-card">
+            <div class="table-item">
                 <img class="img-size" src={{this.photo}} alt="list image">
-                <p>{{this.title}}</p>
+                <p class="item-name">{{this.title}}</p>
                 <a href="/edit/{{this._id}}">
                     <p>Edit</p>
                 </a>

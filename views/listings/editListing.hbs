@@ -1,7 +1,7 @@
 <div class="main-container">
-  <h1>Edit Listing</h1>
-
   <a href="/manage" class="btn secondary-button">Back </a>
+  
+  <h1 class="padding-above">Edit Listing</h1>
 
   <form method="POST" action="/edit/{{listing._id}}" enctype="multipart/form-data">
 
@@ -16,7 +16,7 @@
     </div>
 
     <!-- Add photo upload here -->
-    <div>   
+    <div class="upload-area">   
         <input type="file" name="photo" accept="image/png, image/jpg">
     </div>
     <!-- Add photo upload here -->

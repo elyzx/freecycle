@@ -6,6 +6,12 @@ body {
   flex-direction: column;
 }
 
+.main-container {
+  display: block;
+  padding: 2rem;
+  flex: 1;
+}
+
 a {
   color: #118ab2;
   text-decoration: none;
@@ -79,45 +85,9 @@ h4 {
   text-decoration: none;
 }
 
-/* Body */
-.main-container {
-  display: block;
-  padding: 2rem;
-  flex: 1;
-}
-
-.error {
-  background: #f02b63;
-  box-sizing: border-box;
-  color: #fff;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 5px;
-  width: 100%;
-}
-
+/* Homepage */
 .img-size {
   width: 150px;
-}
-
-.img-size-bigger {
-  width: 400px;
-  margin-bottom: 20px;
-}
-
-.listing-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 50px;
-}
-
-.item-name {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-top: 10px;
 }
 
 .cards {
@@ -138,6 +108,28 @@ h4 {
   margin: 10px;
 }
 
+/* View Listings */
+.img-size-bigger {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.listing-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.item-name {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 10px;
+}
+
+/* Manage Listings */
 .table {
   padding-top: 3rem;
   display: flex;
@@ -145,11 +137,15 @@ h4 {
   justify-content: space-evenly;
 }
 
-.table-card {
+.table-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
 }
 
 .no-listings {
@@ -160,10 +156,10 @@ h4 {
   justify-content: center;
 }
 
-.padding {
-  padding: 20px;
+/* Create/Edit Listing */
+.upload-area {
+  padding: 10px 0 20px 0;
 }
-
 
 /* Footer */
 .footer {
@@ -184,4 +180,22 @@ h4 {
 
 .footer-item:hover{
   color: #073b4c;
+}
+
+/* Misc */
+.error {
+  background: #f02b63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.padding {
+  padding: 20px;
+}
+.padding-above {
+  padding-top: 30px;;
 }
