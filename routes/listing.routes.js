@@ -10,12 +10,11 @@ const NeighbourhoodModel = require("../models/Neighbourhood.model");
 
 // Require nodemailer
 const nodemailer = require('nodemailer')
+const templates = require('../templates/template.js');
 
 // Cloudinary congig file
 const uploader = require('../middlewares/cloudinary.config.js');
 
-const templates = require('../templates/template.js');
-const Neighbourhood = require("../models/Neighbourhood.model");
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -154,7 +153,7 @@ router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
         .then((listing) => {
             
             console.log('Dynamic listing ID = ' + dynamicListingId)
-            Neighbourhood.find()
+            NeighbourhoodModel.find()
             .then((response) => {
                 console.log('Response = ', response)
                 if (listing.user == userId._id) {
@@ -172,6 +171,7 @@ router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
             next('Failed to find listing details')
         })
 })
+
 // Handles POST request to edit a listing
 router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
@@ -209,7 +209,7 @@ router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, nex
 router.get('/delete/:id', checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
-    console.log('hello' + dynamicListingId + userId)
+    console.log('hello ' + dynamicListingId + userId)
 
    // first find the listing and check ownership
    ListingModel.findById(dynamicListingId)
