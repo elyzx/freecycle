@@ -116,26 +116,27 @@ router.get('/reset-password', (req, res, next) => {
     res.render('auth/resetForm.hbs')
 })
 
-function secret() {
-    return "token"
-}
+// Thought process for a reset password functionality
+// function secret() {
+//     return "token"
+// }
 
-// Handles POST request to reset-password page
-router.post('/reset-password', (req, res, next) => {
-    // Update resetPassword token in database for user with email in request
-    // if successful we send an email to the email address that includes a link
-    //  host/reset-password/userid/token
-    // to a reset-password page that contains a field to reset the password
-})
+// // Handles POST request to reset-password page
+// router.post('/reset-password', (req, res, next) => {
+//     // Update resetPassword token in database for user with email in request
+//     // if successful we send an email to the email address that includes a link
+//     //  host/reset-password/userid/token
+//     // to a reset-password page that contains a field to reset the password
+// })
 
-router.get('/reset-password/:id/:token', (req, res, next) => {
-    // render a page that contains the token and user id in the form
-    // and has a new password field.
-})
+// router.get('/reset-password/:id/:token', (req, res, next) => {
+//     // render a page that contains the token and user id in the form
+//     // and has a new password field.
+// })
 
-router.post('/reset-password/:id/:token', (req, res, next) => {
-    // update the password
-})
+// router.post('/reset-password/:id/:token', (req, res, next) => {
+//     // update the password
+// })
 
 //---------------
 //  SIGNOUT
