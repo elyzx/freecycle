@@ -19,8 +19,8 @@ function checkLoggedIn(req, res, next) {
 //----------  PAGES THAT REQUIRE AN ACCOUNT TO BE VISITED ---------------
 //FIRST PAGE TO BE RENDERED AFTER LOG-IN
 
-router.get("/", checkLoggedIn,  (req, res, next) => {
-
+router.get("/?", checkLoggedIn,  (req, res, next) => {
+  console.log(req.query)
   //const userAdressId = req.session.loggedInUser
  
   ListingModel.find()
@@ -33,6 +33,7 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
       const listingsMap = listings.map(x => x) 
       
       let matchId = [];
+      let finalItems
 
       for( let i = 0; i < listingsMap.length; i++ ) {
         if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood._id.toString()){
@@ -40,9 +41,15 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
         }
       }
 
+      if(req.query.search){
+       finalItems = matchId.filter(x => x.title.toLowerCase().includes(req.query.search.toLowerCase()))
+      }
+      else{
+        finalItems = matchId;
+      }
 
         res.render("index", {
-          matches: matchId,
+          matches: finalItems,
           neighbourhood_name: user.neighbourhood.name,
         })
 
@@ -57,31 +64,5 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
 });
 
 
-
-
-
-// router.post("/?", checkLoggedIn,  (req, res, next) => {
-//   let search = req.query
-
-  
-//   ListingModel.find()
-//   .then((listings) => {
-//     console.log('this is a :', search)
-
-//     const filteredListing = listings.filter(listing => {
-//       let isValid = true;
-
-//       for (key in search) {
-//         isValid = isValid && listing[key] == filters[key];
-//       }
-
-//     });
-
-//   })
-//   .catch(() => {
-
-//   })
-
-// });
 
 module.exports = router;
