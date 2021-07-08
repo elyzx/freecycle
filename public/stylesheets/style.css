@@ -86,6 +86,12 @@ h4 {
 }
 
 /* Homepage / Manage Listings */
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
 .img-size {
   object-fit: cover;
   display: block;
