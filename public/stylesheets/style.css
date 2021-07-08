@@ -88,8 +88,7 @@ h4 {
 /* Homepage / Manage Listings */
 .search-bar {
   display: flex;
-  justify-content: flex-end;
-
+  justify-content: space-between;
 }
 
 .img-size {
