@@ -1,19 +1,20 @@
 // Require express
 const router = require("express").Router();
+
 // Require listing model
 const ListingModel = require("../models/Listing.model");
 // Require User model
 const UserModel = require("../models/User.model");
 // Require Neighbourhood model
 const NeighbourhoodModel = require("../models/Neighbourhood.model");
-const Listing = require("../models/Listing.model");
+
 // Require nodemailer
 const nodemailer = require('nodemailer')
+const templates = require('../templates/template.js');
 
 // Cloudinary congig file
 const uploader = require('../middlewares/cloudinary.config.js');
 
-const templates = require('../templates/template.js')
 
 //----------  MIDDLEWARE FOR PERMISSIONS ---------------
 function checkLoggedIn(req, res, next) {
@@ -145,27 +146,37 @@ router.get('/manage', checkLoggedIn, (req, res, next) => {
 router.get('/edit/:id', checkLoggedIn, (req, res, next) => {
     let userId = req.session.loggedInUser
     let dynamicListingId = req.params.id
+    const {neighbourhood} = req.body
 
     ListingModel.findById(dynamicListingId)
+    .populate('neighbourhood')
         .then((listing) => {
-
-            if (listing.user == userId._id) {
-                console.log(listing)
-                res.render('listings/editListing.hbs', {listing})
-            } else {
-                next(`User ${userId._id} tried to edit another user's listing`)
-            }
             
+            console.log('Dynamic listing ID = ' + dynamicListingId)
+            NeighbourhoodModel.find()
+            .then((response) => {
+                console.log('Response = ', response)
+                if (listing.user == userId._id) {
+                    console.log(listing)
+                    res.render('listings/editListing.hbs', {listing, response})
+                } else {
+                    next(`User ${userId._id} tried to edit another user's listing`)
+                }
+            })
+            .catch(() => {
+                next("Failed to find the listing's neighbourhood")
+            })
         })
         .catch(() => {
             next('Failed to find listing details')
         })
 })
+
 // Handles POST request to edit a listing
 router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
-    const {title, description} = req.body
+    const {title, description, neighbourhood} = req.body
     const photo = req.file.path
 
     // first find the listing and check ownership
@@ -174,7 +185,7 @@ router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, nex
             if (listing.user == userId._id) {
                 console.log(listing)
                 // if allowed, find and update listing
-                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description, photo}, {new: true})
+                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description, photo, neighbourhood}, {new: true})
                     .then((data) => {
                         console.log(data)
                         res.redirect('/manage')
@@ -198,7 +209,7 @@ router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, nex
 router.get('/delete/:id', checkLoggedIn, (req, res, next) => {
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
-    console.log('hello' + dynamicListingId + userId)
+    console.log('hello ' + dynamicListingId + userId)
 
    // first find the listing and check ownership
    ListingModel.findById(dynamicListingId)
