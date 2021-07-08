@@ -178,6 +178,7 @@ router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, nex
     let userId = req.session.loggedInUser
     const {title, description, neighbourhood} = req.body
     const photo = req.file.path
+    console.log("file" + req.file)
 
     // first find the listing and check ownership
     ListingModel.findById(dynamicListingId)
