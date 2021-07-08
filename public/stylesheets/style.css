@@ -87,7 +87,12 @@ h4 {
 
 /* Homepage / Manage Listings */
 .img-size {
-  width: 150px;
+  object-fit: cover;
+  display: block;
+  height: auto; 
+  width: 100%;
+  max-width: 150px; 
+  max-height: 100px;
 }
 
 .cards {
