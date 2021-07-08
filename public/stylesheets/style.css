@@ -85,7 +85,7 @@ h4 {
   text-decoration: none;
 }
 
-/* Homepage */
+/* Homepage / Manage Listings */
 .img-size {
   width: 150px;
 }
@@ -108,7 +108,15 @@ h4 {
   margin: 10px;
 }
 
-/* View Listings */
+.no-listings {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* View Listing */
 .img-size-bigger {
   width: 400px;
   margin-bottom: 20px;
@@ -127,33 +135,6 @@ h4 {
   justify-content: center;
   align-items: flex-end;
   padding-top: 10px;
-}
-
-/* Manage Listings */
-.table {
-  padding-top: 3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.table-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 10px;
-}
-
-.no-listings {
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Create/Edit Listing */
@@ -198,4 +179,10 @@ h4 {
 }
 .padding-above {
   padding-top: 30px;;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

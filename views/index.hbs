@@ -2,16 +2,16 @@
     <h1>Rehome Goods in Your Neighbourhood</h1>
     <h4>📍 {{neighbourhood_name}}</h4>
 
+     <div class="cards">
         {{#each matches}} 
-            <div class="cards">
                 <div class="cards-item">
                     <a href="/listings/{{this._id}}">
                         <img class="img-size" src={{this.photo}} alt="list image">
                         <p class="item-name">{{this.title}}</p>
                     </a> 
                 </div>
-            </div>
         {{else}}
+        </div>
             <div class="no-listings">
                 <div class="padding">
                     <h3>No listings available.</h3> 
