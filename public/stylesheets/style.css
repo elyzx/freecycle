@@ -91,6 +91,13 @@ h4 {
   justify-content: space-between;
 }
 
+.search {
+  padding: 7px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
 .img-size {
   object-fit: cover;
   display: block;
