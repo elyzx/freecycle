@@ -18,7 +18,7 @@
       <select class="form-select" name="neighbourhood" value="{{user.neighbourhood}}" aria-label="Default select example">
               {{#each neighbourhood}}
               
-                <option value="{{this._id}}" {{{select user this.name}}}>{{this.name}}</option>
+                <option value="{{this._id}}" {{{select ../user.neighbourhood.name this.name}}}>{{this.name}}</option>
 
               {{/each}}
       </select>
