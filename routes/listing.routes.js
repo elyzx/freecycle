@@ -177,16 +177,20 @@ router.post('/edit/:id', uploader.single("photo"), checkLoggedIn, (req, res, nex
     let dynamicListingId = req.params.id
     let userId = req.session.loggedInUser
     const {title, description, neighbourhood} = req.body
-    const photo = req.file.path
-    console.log("file" + req.file)
-
+   
     // first find the listing and check ownership
     ListingModel.findById(dynamicListingId)
         .then((listing) => {
             if (listing.user == userId._id) {
                 console.log(listing)
                 // if allowed, find and update listing
-                ListingModel.findByIdAndUpdate(dynamicListingId, {title, description, photo, neighbourhood}, {new: true})
+                let updatedPost = {title, description, neighbourhood}
+                // if a new file is uploaded, update the photo
+                if (req.file) {
+                    const photo = req.file.path
+                    updatedPost.push({photo})
+                }
+                ListingModel.findByIdAndUpdate(dynamicListingId, updatedPost, {new: true})
                     .then((data) => {
                         console.log(data)
                         res.redirect('/manage')
