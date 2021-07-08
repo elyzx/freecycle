@@ -48,39 +48,39 @@ router.get('/listings/:id', checkLoggedIn, (req, res, next) => {
         })
 })
 
-router.post('/send-email/:title', (req, res, next) => {
+router.post('/send-email/:id', (req, res, next) => {
     let userObj = req.session.loggedInUser
-    let dynamicListingTitle = req.params.title
-    console.log(dynamicListingTitle)
+    let dynamicListingId = req.params.id
     let { name, email, subject, message } = req.body;
 
-    UserModel.findById(userObj)
-    .then(() => {
-        let transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-              user: 'freecycle.ironhack@gmail.com',
-              pass: process.env.EMAIL_PASSWORD
-            }
-          });
-          transporter.sendMail({
-            from: '"Freecycle - Item Request" <freecycle.ironhack@gmail.com}>',
-            to: userObj.email,
-            subject: `RE: ${dynamicListingTitle}`,
-            text: `Name: ${name}. Email: ${email}. Message: ${message}`,
-            html: `Name ${name}. Email: ${email}. Message: ${message}`,
-            // html: templates.templateExample(name, email, message)
-          })
-          .then(() => {
-            res.render('listings/emailConfirmation.hbs', {email, subject, message})
-          })
-          .catch((err => {
-              next(err)
-          }))
-    })
-    .catch((err) => {
-        next(err)
-    })
+    ListingModel.findById(dynamicListingId)
+        .populate("user")
+        .then((listing) => {
+            let transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                  user: 'freecycle.ironhack@gmail.com',
+                  pass: process.env.EMAIL_PASSWORD,
+                },
+            })
+            transporter.sendMail({
+                from: '"Freecycle - Item Request" <freecycle.ironhack@gmail.com}>',
+                to: listing.user.email,
+                subject: `RE: ${listing.title}`,
+                text: `Name: ${name}. Email: ${email}. Message: ${message}`,
+                // html: `Name ${name}. Email: ${email}. Message: ${message}`,
+                html: templates.email(name, email, message)
+            })
+            .then(() => {
+                res.render('listings/emailConfirmation.hbs')
+            })
+            .catch((err => {
+                next(err)
+            }))    
+        })
+        .catch((err => {
+            next(err)
+        }))
 });
 
 

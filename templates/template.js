@@ -1,6 +1,5 @@
-module.exports = {
-    templateExample: (name, email, message) => { return 
-   `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+module.exports.email = function (name, email, message) {
+    return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <!--[if IE]><html xmlns="http://www.w3.org/1999/xhtml" class="ie"><![endif]-->
     <!--[if !IE]><!-->
     <html style="margin: 0;padding: 0;" xmlns="http://www.w3.org/1999/xhtml">
@@ -734,14 +733,6 @@ module.exports = {
                                     <!--[if (mso)|(IE)]><table align="center" class="preheader" cellpadding="0" cellspacing="0" role="presentation"><tr><td style="width: 280px" valign="top"><![endif]-->
                                     <div class="snippet" style="display: table-cell;Float: left;font-size: 12px;line-height: 19px;max-width: 280px;min-width: 140px; width: 140px;width: calc(14000% - 78120px);padding: 10px 0 5px 0;color: #adb3b9;font-family: sans-serif;">
                                     </div>
-                                    <!--[if (mso)|(IE)]></td><td style="width: 280px" valign="top"><![endif]-->
-                                    <div class="webversion" style="display: table-cell;Float: left;font-size: 12px;line-height: 19px;max-width: 280px;min-width: 139px; width: 139px;width: calc(14100% - 78680px);padding: 10px 0 5px 0;text-align: right;color: #adb3b9;font-family: sans-serif;">
-                                        <p style="Margin-top: 0;Margin-bottom: 0;" emb-social="webversion">
-                                            No images? 
-                                            <a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #adb3b9;" href="https://student.createsend1.com/t/y-e-otutldl-l-r/">Click here</a>
-                                        </p>
-                                    </div>
-                                    <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
                                 </div>
                             </div>
                             <div class="header" style="Margin: 0 auto;max-width: 600px;min-width: 320px; width: 320px;width: calc(28000% - 167400px);" id="emb-email-header-container">
@@ -827,15 +818,8 @@ module.exports = {
     
                                                             <div class="email-footer__additional-info" style="font-size: 12px;line-height: 19px;margin-bottom: 15px;Margin-top: 18px;margin-left: 20px;margin-right: 20px;">
                                                                 <div bind-to="permission">
-                                                                    <p class="email-flexible-footer__additionalinfo--center" style="Margin-top: 0;Margin-bottom: 0;">You have received this email because you&nbsp;posted a listing on Freecycle.&nbsp;If you no longer wish to receive emails from us, feel free to click on the link below.</p>
+                                                                    <p class="email-flexible-footer__additionalinfo--center" style="Margin-top: 0;Margin-bottom: 0;">You received this email becuase you posted an item on Freecycle.</p>
                                                                 </div>
-                                                            </div>
-                                                            <div class="email-footer__additional-info" style="font-size: 12px;line-height: 19px;margin-bottom: 15px;margin-left: 20px;margin-right: 20px;">
-                                                                <span>
-                                                                    <a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #adb3b9;" href="https://student.updatemyprofile.com/y-l-2AD73FFF-l-y" lang="en">Preferences</a>
-                                                                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                                                                </span>
-                                                                <a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #adb3b9;" href="https://student.createsend1.com/t/y-u-otutldl-l-j/">Unsubscribe</a>
                                                             </div>
                                                             <!--[if mso]>&nbsp;<![endif]-->
                                                         </div>
@@ -860,4 +844,5 @@ module.exports = {
         <script type="text/javascript" src="https://js.createsend1.com/js/tsb.min.js?h=354E27EC20191204125554"></script>
         <script type="text/javascript" src="https://js.createsend1.com/js/compiled/app/content/emailPreview-iframe.min.js?h=B3949D4520191204125554" data-model='{"Scrollbars":true}'></script>
     </body>
-    </html>`}}
+    </html>`
+}
