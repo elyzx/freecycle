@@ -89,10 +89,8 @@ h4 {
 .img-size {
   object-fit: cover;
   display: block;
-  height: auto; 
-  width: 100%;
-  max-width: 150px; 
-  max-height: 100px;
+  width: 150px; 
+  height: 100px;
 }
 
 .cards {
