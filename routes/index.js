@@ -32,19 +32,14 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
         .then((user) => {
       const listingsMap = listings.map(x => x) 
       
-
-
       let matchId = [];
 
       for( let i = 0; i < listingsMap.length; i++ ) {
         if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood._id.toString()){
           matchId.push(listingsMap[i])
         }
-        console.log(typeof user.neighbourhood, 'this is the user in the for loop')
-        console.log(typeof listingsMap[i], 'this is the list in the for loop')
       }
 
-      console.log(matchId)
 
         res.render("index", {
           matches: matchId,
@@ -60,5 +55,33 @@ router.get("/", checkLoggedIn,  (req, res, next) => {
       next('No available listings. Check back later!')
     })
 });
+
+
+
+
+
+// router.post("/?", checkLoggedIn,  (req, res, next) => {
+//   let search = req.query
+
+  
+//   ListingModel.find()
+//   .then((listings) => {
+//     console.log('this is a :', search)
+
+//     const filteredListing = listings.filter(listing => {
+//       let isValid = true;
+
+//       for (key in search) {
+//         isValid = isValid && listing[key] == filters[key];
+//       }
+
+//     });
+
+//   })
+//   .catch(() => {
+
+//   })
+
+// });
 
 module.exports = router;
