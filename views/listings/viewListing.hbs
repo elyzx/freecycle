@@ -10,26 +10,23 @@
 
     <h4>Request Item</h4>
     <p>Get in touch with the owner by filling out the form below.</p>
-        <form action="/send-email/{{listing._id}}" method="post">
+    <form action="/send-email/{{listing._id}}" method="post">
+        <div class="mb-3">
+            <label for="exampleInputTitle" class="form-label">Your Name</label>
+            <input type="text" name="name" class="form-control" id="exampleInputTitle" required>
+        </div>
 
-            <div class="mb-3">
-                <label for="exampleInputTitle" class="form-label">Your Name</label>
-                <input type="text" name="name" class="form-control" id="exampleInputTitle" required>
-            </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Your Email Address</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+        </div>
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Your Email Address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                <div id="messageHelp" class="form-text">Request to collect the item or ask a question.</div>
-                <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3" required></textarea>
-             </div>
-
-            <button type="submit" class="btn primary-button">Submit</button>
-
-        </form>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+            <div id="messageHelp" class="form-text">Request to collect the item or ask a question.</div>
+            <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn primary-button">Submit</button>
+    </form>
 
 </div>

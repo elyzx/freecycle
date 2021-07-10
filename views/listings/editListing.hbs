@@ -6,18 +6,22 @@
       <label for="exampleInputTitle" class="form-label">Item Name</label>
       <input type="text" name="title" value="{{listing.title}}" class="form-control" id="exampleInputTitle" required>
     </div>
+
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Description</label>
       <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required>{{listing.description}}</textarea>
     </div>
+
     <div>
       <img src={{listing.photo}} alt="" class="img-size">
     </div>
+
     <!-- Add photo upload here -->
     <div class="upload-area">   
         <input type="file" name="photo" accept="image/png, image/jpg">
     </div>
     <!-- Add photo upload here -->
+
     <div class="mb-3">
       <label for="neighbourhood" class="form-label">Neighbourhood</label>
       <select class="form-select" name="neighbourhood" value="{{listing.neighbourhood}}" aria-label="Default select example">
@@ -26,7 +30,8 @@
             <option value="{{this._id}}" {{{select ../listing.neighbourhood.name this.name}}}>{{this.name}}</option>
           {{/each}}
       </select>
-  </div>
+    </div>
+
   <button type="submit" class="btn primary-button">Save Changes</button>
   </form>
 </div>
