@@ -14,12 +14,10 @@ const express = require("express");
 const hbs = require("hbs");
 
 //-------------------- registerHelper -----------------------
-// TO DO
 hbs.registerHelper('select', function(selected, option) {
   console.log(selected, option)
   return (selected == option) ? 'selected="selected"' : '';
 });
-
 //-------------------- registerHelper -----------------------
 
 const app = express();
@@ -50,7 +48,6 @@ app.use(session({
     })
   }));
 // -------------------------------------------------
-
 
 // 👇 Start handling routes here
 const index = require("./routes/index");

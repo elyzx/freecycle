@@ -18,7 +18,6 @@ const listingSchema = new Schema({
     ref: 'User',
     type: mongoose.Schema.Types.ObjectId
   }
-
 });
 
 const Listing = model("Listing", listingSchema);

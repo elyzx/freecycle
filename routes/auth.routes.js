@@ -1,16 +1,13 @@
 // require express
 const router = require("express").Router();
-
 // require user model
 const UserModel = require('../models/User.model')
 // require neighbourhood model
 const NeighbourhoodModel = require('../models/Neighbourhood.model')
 // require Listing model
 const ListingModel = require("../models/Listing.model");
-
 // require bcrypt for password encryption
 const bcrypt = require('bcryptjs');
-
 
 //---------------
 //  LOGN-IN
@@ -52,14 +49,13 @@ router.post('/login', (req, res, next) => {
 router.get('/register', (req, res, next) => {
 
     NeighbourhoodModel.find({})
-    .then((neighbourhood) => {
-        console.log(neighbourhood)
-        res.render('auth/register.hbs', {neighbourhood})
+        .then((neighbourhood) => {
+            res.render('auth/register.hbs', {neighbourhood})
+        })
+        .catch((err) => {
+            next(err)
+        })
     })
-    .catch((err) => {
-        next(err)
-    })
-})
 
 router.post('/register', (req, res, next) => {
     const {name, email, password, neighbourhood} = req.body
@@ -98,14 +94,13 @@ router.post('/register', (req, res, next) => {
                 console.log(err)
                 if (err.name === 'MongoError' && err.code === 11000) {
                     NeighbourhoodModel.find({})
-                    .then((neighbourhood) => {
-                        console.log(neighbourhood)
-                        res.render('auth/register.hbs', {neighbourhood, error: "Email already registered."})
-                    })
-                    .catch((err) => {
-                        next(err)
-                    })
-                } else {
+                        .then((neighbourhood) => {
+                            res.render('auth/register.hbs', {neighbourhood, error: "Email already registered."})
+                        })
+                        .catch((err) => {
+                            next(err)
+                        })
+                }else{
                     next(err)
                 }
             })

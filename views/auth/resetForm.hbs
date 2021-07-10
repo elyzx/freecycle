@@ -4,14 +4,12 @@
   <p>Don't have an account? <a href="/register">Register here</a>.</p>
 
   <form method="POST" action="/reset-password">
-
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
     
     <button type="submit" class="btn primary-button">Submit</button>
-
   </form>
 
   {{#if error}}

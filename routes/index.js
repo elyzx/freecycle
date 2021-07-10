@@ -30,29 +30,28 @@ router.get("/?", checkLoggedIn,  (req, res, next) => {
       UserModel.findById(req.session.loggedInUser._id)
         .populate('neighbourhood')
         .then((user) => {
-      const listingsMap = listings.map(x => x) 
+          const listingsMap = listings.map(x => x) 
       
-      let matchId = [];
-      let finalItems
+          let matchId = [];
+          let finalItems
 
-      for( let i = 0; i < listingsMap.length; i++ ) {
-        if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood._id.toString()){
-          matchId.push(listingsMap[i])
-        }
-      }
+          for( let i = 0; i < listingsMap.length; i++ ) {
+            if(listingsMap[i].neighbourhood._id.toString() == user.neighbourhood._id.toString()){
+            matchId.push(listingsMap[i])
+            }
+          }
 
-      if(req.query.search){
-       finalItems = matchId.filter(x => x.title.toLowerCase().includes(req.query.search.toLowerCase()))
-      }
-      else{
-        finalItems = matchId;
-      }
+          if(req.query.search){
+            finalItems = matchId.filter(x => x.title.toLowerCase().includes(req.query.search.toLowerCase()))
+          }
+          else{
+            finalItems = matchId;
+          }
 
-        res.render("index", {
-          matches: finalItems,
-          neighbourhood_name: user.neighbourhood.name,
-        })
-
+          res.render("index", {
+            matches: finalItems,
+            neighbourhood_name: user.neighbourhood.name,
+          })
         })
         .catch((err) => {
           next(err)
@@ -62,7 +61,5 @@ router.get("/?", checkLoggedIn,  (req, res, next) => {
       next('No available listings. Check back later!')
     })
 });
-
-
 
 module.exports = router;

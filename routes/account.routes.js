@@ -24,35 +24,28 @@ router.get('/account', checkLoggedIn, (req, res, next) => {
     const {neighbourhood} = req.body
 
     UserModel.findById(userObj._id)
-    .populate('neighbourhood')
+        .populate('neighbourhood')
         .then((user) => {
-
             NeighbourhoodModel.find(neighbourhood)
-            
-            .then((neighbourhood) => {
-                console.log(user)
-                res.render('account.hbs', {user, neighbourhood})
-            })
-            .catch((err) => {
-                next(err)
-            })
-
+                .then((neighbourhood) => {
+                    res.render('account.hbs', {user, neighbourhood})
+                })
+                .catch((err) => {
+                    next(err)
+                })
         })
         .catch((err)=> {
             next(err)
         })
-})
+    })
 
 // Handle POST request for /account
 router.post('/account', checkLoggedIn, (req, res, next) => {
     let userObj = req.session.loggedInUser
-
     const {name, email, neighbourhood} = req.body
-
 
     UserModel.findByIdAndUpdate(userObj._id, {name, email, neighbourhood}, {new: true})
         .then((data) => {
-            console.log(data)
             res.redirect('/')
         })
         .catch((err) => {
@@ -70,14 +63,14 @@ router.get('/account/delete/:id', checkLoggedIn, (req, res, next) => {
     }
     
     UserModel.findByIdAndDelete(userId)
-    .then(() => {
-        req.session.destroy()
-        req.app.locals.isLoggedIn = false;
-        res.redirect('/')
+        .then(() => {
+            req.session.destroy()
+            req.app.locals.isLoggedIn = false;
+            res.redirect('/')
+        })
+        .catch(() => {
+            next('Failed to delete user account.')
+        })
     })
-    .catch(() => {
-        next('Failed to delete user account.')
-    })
-})
 
 module.exports = router;

@@ -1,9 +1,7 @@
 // Making our DB connection
 require('../db')
-
 // Require Mongoose
 const mongoose = require('mongoose')
-
 // Get our Model
 const ListingModel = require('../models/Listing.model')
 
