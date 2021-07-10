@@ -60,25 +60,25 @@ router.get('/register', (req, res, next) => {
 router.post('/register', (req, res, next) => {
     const {name, email, password, neighbourhood} = req.body
     
-    // check all fields are complete
+    //check all fields are complete
     // if (!name || !email || !password || !neighbourhood) {
-        // res.render('auth/register.hbs', {error: 'Please enter all fields'})
-        // return;
+    //     res.render('auth/register.hbs', {error: 'Please enter all fields'})
+    //     return;
     // }
 
     // Check email format
-    // const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // if (!re.test(email)) {
-        // res.render('auth/register.hbs', {error: 'Email address not valid. Please check and try again.'})
-        // return;
-    // }
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(email)) {
+        res.render('auth/register.hbs', {neighbourhood, error: 'Email address not valid. Please check and try again.'})
+        return;
+    }
 
     // check the password strength
-    // const passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    // if (!passRegEx.test(password)) {
-        // res.render('auth/register.hbs', {error: 'Password not strong enough. Make sure your password is 6-16 characters long and includes both a special character and a number.'})
-        // return;
-    // }
+    const passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (!passRegEx.test(password)) {
+        res.render('auth/register.hbs', {neighbourhood, error: 'Password not strong enough. Make sure your password is 6-16 characters long and includes both a special character (!, @, #, $, *) and a number.'})
+        return;
+    }
 
     // Password encyrption time! 
     // Generate salt
@@ -107,9 +107,9 @@ router.post('/register', (req, res, next) => {
 })
 
 // Handles GET request to reset-password page
-router.get('/reset-password', (req, res, next) => {
-    res.render('auth/resetForm.hbs')
-})
+// router.get('/reset-password', (req, res, next) => {
+//     res.render('auth/resetForm.hbs')
+// })
 
 // Thought process for a reset password functionality
 // function secret() {
