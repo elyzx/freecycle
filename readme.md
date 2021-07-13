@@ -3,8 +3,6 @@
 ## Description
 A free marketplace for rehoming unwanted items, Freecycle makes it easy to connect with your community and rehome goods in your neighbourhood.
 
-## User Stories
-
 ## Routes
 
 ### Auth
