@@ -50,6 +50,7 @@ router.get('/register', (req, res, next) => {
 
     NeighbourhoodModel.find({})
         .then((neighbourhood) => {
+            req.session.neighbourhood = neighbourhood
             res.render('auth/register.hbs', {neighbourhood})
         })
         .catch((err) => {
@@ -69,15 +70,22 @@ router.post('/register', (req, res, next) => {
     // Check email format
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)) {
-        res.render('auth/register.hbs', {neighbourhood, error: 'Email address not valid. Please check and try again.'})
+        res.render('auth/register.hbs', {neighbourhood: req.session.neighbourhood, error: 'Email address not valid. Please check and try again.'})
         return;
     }
 
     // check the password strength
     const passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if (!passRegEx.test(password)) {
-        res.render('auth/register.hbs', {neighbourhood, error: 'Password not strong enough. Make sure your password is 6-16 characters long and includes both a special character (!, @, #, $, *) and a number.'})
+
+       
+
+        res.render('auth/register.hbs', {neighbourhood: req.session.neighbourhood, error: 'Password not strong enough. Make sure your password is 6-16 characters long and includes both a special character (!, @, #, $, *) and a number.'})
         return;
+        
+    
+
+        
     }
 
     // Password encyrption time! 
