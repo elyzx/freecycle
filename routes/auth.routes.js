@@ -78,14 +78,8 @@ router.post('/register', (req, res, next) => {
     const passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if (!passRegEx.test(password)) {
 
-       
-
         res.render('auth/register.hbs', {neighbourhood: req.session.neighbourhood, error: 'Password not strong enough. Make sure your password is 6-16 characters long and includes both a special character (!, @, #, $, *) and a number.'})
-        return;
-        
-    
-
-        
+        return;  
     }
 
     // Password encyrption time! 
